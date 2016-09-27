@@ -1,0 +1,10 @@
+{
+	id: Number,
+	poster_path: String,
+	title: String,
+	year: Number,
+	plot: String,
+	cast: [String],
+	producer: String?,
+	genres: [String]
+}

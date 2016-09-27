@@ -1,0 +1,17 @@
+<div class="jumbotron text-center popular">
+	<h1>Popular movies</h1>
+</div>
+
+<div class="wrapper">
+	{{#each results}}
+		<div class="card-land">
+			<img src="https://image.tmdb.org/t/p/w500{{poster_path}}" class="card-img-left" alt="{{title}}">
+			<div class="card-land-block">
+				<h4 class="card-land-title">{{title}} <small>{{year}}</small></h4>
+				<p class="card-land-text">{{plot}}</p>
+			</div>
+			<a href="#" class="btn-expand btn-primary"><i class="fa fa-expand"></i></a>
+			<button type="submit" id="btn-add2fav" data-id="{{id}}" data-obj="{{this}}" class="btn-add2fav btn-success">Add as favourite</button>
+		</div>
+	{{/each}}
+</div>

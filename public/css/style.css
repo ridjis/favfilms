@@ -1,0 +1,129 @@
+body {
+  font-family: Raleway, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #373a3c;
+  background-color: #eee;
+}
+
+::selection { background: #FFF498; }
+img::selection { background: transparent; }
+
+h4 { font-size: 1.5rem; }
+h4 small { font-size: 0.8rem; }
+h4 small::before { content: "("; }
+h4 small::after { content: ")"; }
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+#site-header .navbar, #site-main .jumbotron {
+	border-radius: 0;
+	border: none;
+	margin: 0;
+}
+#site-header .navbar { background-color: #fff; }
+#site-header .container form {
+  line-height: 55px;
+}
+
+#site-main .jumbotron {
+	padding: 40px 0;
+	color: #cdbfe3;
+	background-color: #563d7c;
+}
+#site-main .jumbotron h1 {
+	color: #fff;
+	font-size: 3.5rem;
+}
+
+#site-main .wrapper {
+	width: 1125px;
+	margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.text-center { text-align: center }
+
+.clearfix::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.card-land {
+  display: flex;
+  position: relative;
+  width: 34.125rem;
+  margin-bottom: 0.75rem;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.card-img-left {
+  display: flex;
+  width: 14.5rem;
+  height: 100%;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+.card-land-block {
+  font-family: "Segoe UI";
+  box-sizing: border-box;
+  width: 19.5rem;
+  height: 100%;
+  padding: 0.5rem 1.25rem 2rem 1.25rem;
+}
+.card-land-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-add2fav, .btn-expand {
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+}
+.btn-add2fav {
+  width: 16.5rem;
+  right: 0;
+  border-bottom-right-radius: 0.25rem;
+}
+.btn-expand {
+  width: 3rem;
+  right: 16.5rem;
+}
+
+.btn-outline-cust {
+  color: #563d7c;
+  border-color: #563d7c;
+  background-color: transparent;
+}
+
+.btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info {
+  transition: background-color 300ms ease;
+}
+
+#btn-add2fav {
+  border: 0;
+}
+
+.form-inline .form-control {
+  width: 20rem;
+}
+.form-control:focus {
+  //border-color: #d9d9d9;
+  //border-color: #5cb85c;
+  border-color: #563d7c;
+}

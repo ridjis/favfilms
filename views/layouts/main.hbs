@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FavFilms</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<header id="site-header">
+		<div class="navbar navbar-light">
+			<div class="container">
+				<a href="/" class="navbar-brand">
+					<img src="/img/ff-logo.svg" alt="ff-logo" height="50">
+				</a>
+				<form action="/movies/search" method="POST" class="form-inline pull-sm-right">
+					<input type="text" name="query" class="form-control" placeholder="Search for movie">
+					<button class="btn btn-outline-cust" type="submit">Search</button>
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<main id="site-main">
+		{{{ body }}}
+	</main>
+</body>
+</html>
