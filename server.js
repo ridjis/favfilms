@@ -10,7 +10,6 @@ const express = require("express"),
 	exphbs = require("express-handlebars"),
 	mongoose = require("mongoose"),
 	cookieParser = require("cookie-parser"),
-	session = require("express-session"),
 	flash = require("connect-flash"),
 	bodyParser = require("body-parser"),
 	expressValidator = require("express-validator"),
@@ -23,12 +22,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressValidator());
 
 app.use(cookieParser());
-app.use(session({
-	secret: process.env.SECRET,
-	cookie: {maxAge: 60000},
-	resave: false,
-	saveUninitialized: false
-}));
 app.use(flash());
 
 app.use(require("./app/routes"));

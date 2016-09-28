@@ -1,28 +1,16 @@
 require("dotenv").config();
-const request = require("request");
-
-const URI = "https://api.themoviedb.org/3/movie/popular?language=en-US";
+const request = require("request"),
+	Movie = require("../models/movie.js");
 
 module.exports = {
 	index: (req, res) => {
-		//res.render("pages/home");
-		const url = URI + process.env.TMDB_API;
-		request(url, function (error, response, body) {
-			if (!error && response.statusCode == 200) {
-				let movies = [];
-				for(movie of JSON.parse(body).results) {
-					movies.push({
-						poster_path: movie.poster_path,
-						original_title: movie.original_title,
-						release_year: movie.release_date.substring(0, 4),
-						overview: movie.overview,
-						id: movie.id
-					});
-				}
-				res.render("pages/home", {
-					results: movies
-				});
-			}
-		})
+		Movie.find({}, {}, {sort: {favs: -1}}, (err, movies) => {
+			if (err) throw err;
+
+			res.render("pages/adv-cards", {
+				header: "Most favorited movies",
+				results: movies
+			});
+		});
 	}
 }

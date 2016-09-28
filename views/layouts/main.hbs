@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>FavFilms</title>
+	<title>{{header}} | favfilms</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/style.css">
@@ -14,6 +14,17 @@
 				<a href="/" class="navbar-brand">
 					<img src="/img/ff-logo.svg" alt="ff-logo" height="50">
 				</a>
+				<ul class="nav navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="/movies/popular">Popular movies</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/movies/top-rated">Top rated movies</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/movies/filter">Genres filter</a>
+					</li>
+				</ul>
 				<form action="/movies/search" method="POST" class="form-inline pull-sm-right">
 					<input type="text" name="query" class="form-control" placeholder="Search for movie">
 					<button class="btn btn-outline-cust" type="submit">Search</button>
@@ -25,5 +36,8 @@
 	<main id="site-main">
 		{{{ body }}}
 	</main>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>
