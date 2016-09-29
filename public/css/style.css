@@ -14,6 +14,9 @@ h4 { font-size: 1.5rem; }
 h4 small { font-size: 0.8rem; }
 h4 small::before { content: "("; }
 h4 small::after { content: ")"; }
+h4 small a, .card-land-genres a {
+  color: #8553f6;
+}
 
 a:hover, a:focus {
   text-decoration: none;
@@ -48,11 +51,11 @@ a:hover, a:focus {
 }
 
 #site-main .wrapper {
-	width: 1125px;
+	width: 90%;
 	margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .text-center { text-align: center }
@@ -61,7 +64,7 @@ a:hover, a:focus {
   display: flex;
   position: relative;
   width: 34.125rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   background-color: #fff;
   border-radius: 0.25rem;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -96,9 +99,7 @@ a:hover, a:focus {
   font-size: 0.75rem; 
   margin-bottom: 5px;
 }
-.card-land-genres a:not(:last-child)::after {
-  content: ",";
-}
+.card-land-genres a:not(:last-child)::after { content: "," }
 .card-land-cast, .card-land-text { 
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -108,10 +109,10 @@ a:hover, a:focus {
   -webkit-line-clamp: 2;
 }
 .card-land-text {
-  -webkit-line-clamp: 7;
+  -webkit-line-clamp: 8;
 }
 .plot-longer {
-  -webkit-line-clamp: 10;
+  -webkit-line-clamp: 11;
 }
 
 .btn-add2fav, .btn-expand {
@@ -190,5 +191,23 @@ a:hover, a:focus {
 }
 #btn-filter:hover { background-color: #5f4389; }
 
-.nav-link::before { content: "| "; }
-.nav-link::after { content: " |"; }
+.nav-link::before, .nav-link::after { 
+  display: inline-block;
+  transform: translateY(-50px);
+  transition: transform 300ms ease;
+}
+
+.nav-link::before { content: "| " }
+.nav-link:hover::before { transform: translate(-5px, 0) }
+
+.nav-link::after { content: " |" }
+.nav-link:hover::after { transform: translate(5px, 0) }
+
+.table {
+  width: 300px;
+  text-align: right;
+  background-color: #fff;
+}
+.table thead th {
+  text-align: right;
+}

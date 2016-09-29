@@ -8,7 +8,9 @@
 			<img src="https://image.tmdb.org/t/p/w500{{poster_path}}" class="card-img-left" alt="{{title}}">
 			<div class="card-land-block">
 				<div class="card-land-favs">{{favs}}</div>
-				<h4 class="card-land-title">{{title}} <small>{{year}}</small></h4>
+				<h4 class="card-land-title">{{title}} 
+					<small><a href="/year/{{year}}">{{year}}</a></small>
+				</h4>
 				<p class="card-land-genres">
 					{{#each genres}}
 						<a href="/genre/{{this}}">{{this}}</a>

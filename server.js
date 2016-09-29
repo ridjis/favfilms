@@ -1,5 +1,5 @@
 // load environment varibles
-//require("dotenv").config();
+require("dotenv").config();
 
 // grab our dependencies
 const express = require("express"),
@@ -9,19 +9,14 @@ const express = require("express"),
 	exphbs = require("express-handlebars"),
 	mongoose = require("mongoose"),
 	cookieParser = require("cookie-parser"),
-	flash = require("connect-flash"),
 	bodyParser = require("body-parser"),
-	expressValidator = require("express-validator"),
 	errorHandler = require("errorhandler");
 
 // cofigure our application
 app.set("views", __dirname + "/views");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(expressValidator());
-
 app.use(cookieParser());
-app.use(flash());
 
 app.use(require("./app/routes"));
 app.use(express.static(__dirname + "/public"));

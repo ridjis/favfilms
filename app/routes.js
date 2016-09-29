@@ -9,7 +9,9 @@ router.get("/movies/top-rated", movies.toprated);
 router.get("/movies/filter", movies.showGenres);
 router.post("/movies/filter", movies.filter);
 router.post("/movies/search", movies.search);
+router.get("/movies/favsbyyears", movies.favsByYears);
 router.post("/movies/:movie_id/fav", movies.fav);
 router.get("/genre/:name", movies.genre);
+router.get("/year/:year", movies.year);
 
 module.exports = router;

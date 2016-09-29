@@ -1,4 +1,4 @@
-//require("dotenv").config();
+require("dotenv").config();
 const request = require("request"),
 	  Movie = require("../models/movie.js");
 
@@ -38,6 +38,7 @@ module.exports = {
 			if (movie) {
 				// ako je pronađen film, povećati broj favs
 				movie.favs = movie.favs + 1;
+				movie.timestamp = new Date();
 				movie.save((err) => { if (err) throw err });
 			} else {
 				// dodaj u model i izvrši još 2 http zahtjeva za uloge i žanr
@@ -136,6 +137,20 @@ module.exports = {
 		});
 
 	}, // end filter-genres POST
+	favsByYears: (req, res) => {
+		let o = {};
+		o.map = function () { emit(this.year, this.favs) };
+		o.reduce = function (key, values) { return Array.sum(values) };
+		o.out = {inline: 1};
+		Movie.mapReduce(o, (err, results) => {
+			if (err) throw err;
+
+			res.render("pages/favs-by-years", {
+				header: "Number of favorites by years",
+				results
+			});
+		});
+	}, // end favs by years
 	genre: (req, res) => {
 		Movie.find({genres: {$regex: req.params.name}}, {}, {sort: {favs: -1}}, (err, movies) => {
 			if (err) throw err;
@@ -146,4 +161,14 @@ module.exports = {
 			});
 		});
 	}, // end genre
+	year: (req, res) => {
+		Movie.find({year: req.params.year}, {}, {sort: {favs: -1}}, (err, movies) => {
+			if (err) throw err;
+
+			res.render("pages/adv-cards", {
+				header: "Movies from " + req.params.year,
+				results: movies
+			});
+		});
+	} // end genre
 };

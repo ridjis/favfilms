@@ -9,7 +9,8 @@ const movieSchema = new Schema({
 	plot: String,
 	genres: [String],
 	cast: [String],
-	favs: {type: Number, default: 1}
+	favs: {type: Number, default: 1},
+	timestamp: {type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model("Movie", movieSchema);
