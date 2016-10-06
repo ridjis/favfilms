@@ -1,4 +1,4 @@
-//require("dotenv").config();
+require("dotenv").config();
 const request = require("request"),
 	  Movie = require("../models/movie.js");
 
@@ -39,7 +39,10 @@ module.exports = {
 				// ako je pronađen film, povećati broj favs
 				movie.favs = movie.favs + 1;
 				movie.timestamp = new Date();
-				movie.save((err) => { if (err) throw err });
+				movie.save((err) => {
+					if (err) throw err;
+					else res.json({favs: movie.favs});
+				});
 			} else {
 				// dodaj u model i izvrši još 2 http zahtjeva za uloge i žanr
 				const url_details = URI_DETAILS + req.params.movie_id + "?" + API_KEY;
@@ -63,8 +66,7 @@ module.exports = {
 							}
 							new Movie(movie).save((err, movie) => {
 								if (err) throw err;
-
-								console.log("-----Film upješno dodat-----");
+								else res.json({favs: movie.favs});
 							});
 						});
 					}

@@ -127,18 +127,21 @@ a:hover, a:focus {
   text-decoration: none;
   border: 0;
 }
-.btn-add2fav:focus, .btn-add2fav:active {
-  outline: none;
-}
 .btn-add2fav {
   width: 16.5rem;
   right: 0;
   border-bottom-right-radius: 0.25rem;
 }
+.btn-add2fav:disabled { 
+  opacity: .65;
+  cursor: not-allowed;
+}
+.btn-add2fav:focus, .btn-add2fav:active { outline: none }
 .btn-expand {
   width: 3rem;
   right: 16.5rem;
 }
+.btn-wider { width: 19.5rem }
 
 .btn-outline-cust {
   color: #563d7c;
@@ -191,16 +194,14 @@ a:hover, a:focus {
 }
 #btn-filter:hover { background-color: #5f4389; }
 
-.nav-link::before, .nav-link::after { 
+.nav-link::before, .nav-link::after {
+  content: "|";
   display: inline-block;
   transform: translateY(-50px);
   transition: transform 300ms ease;
 }
 
-.nav-link::before { content: "| " }
 .nav-link:hover::before { transform: translate(-5px, 0) }
-
-.nav-link::after { content: " |" }
 .nav-link:hover::after { transform: translate(5px, 0) }
 
 .table {
