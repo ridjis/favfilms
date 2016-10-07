@@ -10,6 +10,15 @@ const API_KEY = process.env.TMDB_API;
 let GENRES = [];
 
 module.exports = {
+	fix: (req, res) => {
+		res.send("fix page.");
+	},
+	details: (req, res) => {
+		Movie.findOne({id: req.params.movie_id}, (err, movie) => {
+			if (err) throw err;
+			else res.json(movie);
+		});
+	},
 	search: (req, res) => {
 		const url = URI_QUERY + req.body.query + "&" + API_KEY;
 		request(url, function (error, response, body) {
@@ -54,6 +63,7 @@ module.exports = {
 						movie = {
 							id: body.id,
 							poster_path: body.poster_path,
+							backdrop_path: body.backdrop_path,
 							title: body.original_title,
 							year: body.release_date.substring(0, 4),
 							plot: body.overview,

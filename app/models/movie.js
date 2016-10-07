@@ -4,6 +4,7 @@ const mongoose = require("mongoose"),
 const movieSchema = new Schema({
 	id: {type: Number, unique: true},
 	poster_path: String,
+	backdrop_path: String,
 	title: String,
 	year: Number,
 	plot: String,

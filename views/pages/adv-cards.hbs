@@ -19,10 +19,26 @@
 				<p class="card-land-cast">{{cast}}</p>
 				<p class="card-land-text">{{plot}}</p>
 			</div>
-			<button type="submit" data-id="{{id}}" class="btn-expand btn-primary">
+			<button type="button" data-id="{{id}}" class="btn-expand btn-primary cta">
 				<i class="fa fa-expand"></i>
 			</button>
 			<button type="submit" data-id="{{id}}" class="btn-add2fav btn-success">Add as favourite</button>
 		</div>
 	{{/each}}
+</div>
+<div class="overlay">
+	<div class="modal-movie">
+		<div class="img-left">
+			<img class="poster" src="" alt="">
+			<button type="submit" class="btn-fav btn-success">Add as favourite</button>
+		</div>
+		<div class="details-block">
+			<div class="favs"></div>
+			<h2 class="title"><small class="year"></small></h2>
+			<p class="genres"></p>
+			<p class="cast"></p>
+			<p class="plot"></p>
+		</div>
+		<span class="close-btn">&times;</span>
+	</div>
 </div>
