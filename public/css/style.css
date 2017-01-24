@@ -6,8 +6,8 @@ body {
   background-color: #eee;
 }
 
-::selection { background: #FFF498; }
-img::selection { background: transparent; }
+::selection { background: #FFF498 }
+img::selection { background: transparent }
 
 h2 { font-size: 2.75rem; }
 h4 { font-size: 1.5rem; }
@@ -18,24 +18,20 @@ h4 small a, .card-land-genres a {
   color: #8553f6;
 }
 
-a:hover, a:focus {
-  text-decoration: none;
-}
+a:hover, a:focus { text-decoration: none }
 
 #site-header .navbar, #site-main .jumbotron {
 	border-radius: 0;
 	border: none;
 	margin: 0;
 }
-#site-header .navbar { background-color: #fff; }
+#site-header .navbar { background-color: #fff }
 #site-header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-#site-header .container::after {
-  content: none;
-}
+#site-header .container::after { content: none }
 
 #site-main .jumbotron {
   position: relative;
@@ -147,9 +143,7 @@ a:hover, a:focus {
   color: #fefefe;
 }
 
-.btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info, #btn-filter, .btn-outline-cust {
-  transition: all 300ms ease;
-}
+.btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info, #btn-filter, .btn-outline-cust { transition: all 300ms ease }
 
 .form-inline .form-control {
   width: 17.5rem;
@@ -163,7 +157,7 @@ a:hover, a:focus {
   vertical-align: middle;
   margin-right: 0.75rem;
 }
-.genre-title { font-size: 1.5rem; }
+.genre-title { font-size: 1.5rem }
 .form-check {
   display: flex;
   flex-wrap: wrap;
@@ -172,7 +166,7 @@ a:hover, a:focus {
   margin-bottom: 0;
   -webkit-user-select: none;
 }
-.form-check .col-sm-3 { text-align: left; }
+.form-check .col-sm-3 { text-align: left }
 
 #btn-filter {
   position: absolute;
@@ -186,7 +180,7 @@ a:hover, a:focus {
   border-left: .125rem solid #473267;
   outline: none;
 }
-#btn-filter:hover { background-color: #5f4389; }
+#btn-filter:hover { background-color: #5f4389 }
 
 .nav-link::before, .nav-link::after {
   content: "|";
@@ -203,9 +197,7 @@ a:hover, a:focus {
   text-align: right;
   background-color: #fff;
 }
-.table thead th {
-  text-align: right;
-}
+.table thead th { text-align: right }
 
 .clearfix::before, .clearfix::after {
   content: "";

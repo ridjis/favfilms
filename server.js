@@ -1,6 +1,3 @@
-// load environment varibles
-require("dotenv").config();
-
 // grab our dependencies
 const express = require("express"),
 	app = express(),
