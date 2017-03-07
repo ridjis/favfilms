@@ -7,7 +7,8 @@ const express = require("express"),
 	mongoose = require("mongoose"),
 	cookieParser = require("cookie-parser"),
 	bodyParser = require("body-parser"),
-	errorHandler = require("errorhandler");
+	errorHandler = require("errorhandler"),
+	favicon = require('serve-favicon');
 
 // cofigure our application
 app.set("views", __dirname + "/views");
@@ -17,6 +18,7 @@ app.use(cookieParser());
 
 app.use(require("./app/routes"));
 app.use(express.static(__dirname + "/public"));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 if ("development" === app.get("env"))
 	app.use(errorHandler());
