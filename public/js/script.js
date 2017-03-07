@@ -2,16 +2,35 @@ $(function() {
 	$(".btn-add2fav").click(function(event) {
         event.preventDefault();
 
-        const movieId = $(this).data("id");
+        const self = event.target;
+        const movieId = self.dataset.id;
         const btn = $(this);
-        const favcounter = btn.parent().children(".card-land-block").children(".card-land-favs").get(0);
+        const favcounter = self.parentElement.childNodes[3].childNodes[1];
 
-        btn.prop("disabled", true).text("Fav'd");
+        self.setAttribute("disabled", true);
+        self.innerText = "Fav'd";
         $.post("/movies/" + movieId + "/fav", (data) => {
             favcounter.innerText = data.favs;
-            setTimeout(() => { btn.prop("disabled", false).text("Add to favorites") }, 500);
+            setTimeout(() => { self.removeAttribute("disabled"); self.innerText = "Add to favorites"; }, 500);
         });
     });
+    $(".btn-fav").click(function(event) {
+        event.preventDefault();
+
+        const self = event.target;
+        const movieId = self.dataset.id;
+        const favcounter = self.parentElement.parentElement.childNodes[3].childNodes[1];
+        const favCounterCard = document.querySelector(".card-land [data-id='" + movieId + "']").parentElement.childNodes[3].childNodes[1];
+
+        self.setAttribute("disabled", true);
+        self.innerText = "Fav'd";
+        $.post("/movies/" + movieId + "/fav", (data) => {
+            favcounter.innerText = data.favs;
+            favCounterCard.innerText = data.favs;
+            setTimeout(() => { self.removeAttribute("disabled"); self.innerText = "Add to favorites"; }, 500);
+        });
+    });
+
     $(".btn-expand").click(function(event) {
         $('.overlay').addClass('is-open');
         const movieId = $(this).data("id");
@@ -27,7 +46,6 @@ $(function() {
         const plot = details.children(".plot");
 
         $.post("/movies/" + movieId, (movie) => {
-            console.log(movie);
             modal.css("background-image", "linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://image.tmdb.org/t/p/w1280"+ movie.backdrop_path +"')");
             poster.attr("src", "https://image.tmdb.org/t/p/w500" + movie.poster_path);
             poster.attr("alt", movie.title + " poster");
@@ -41,6 +59,7 @@ $(function() {
             plot.text(movie.plot);
         });
     });
+
     $(".close-btn").click(function(event) {
         $('.overlay').removeClass('is-open')
     });

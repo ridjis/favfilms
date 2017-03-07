@@ -87,7 +87,7 @@ a:hover, a:focus { text-decoration: none }
   background-color: #563d7c;
   color: #fff;
   text-align: center;
-  -webkit-user-select: none;
+  user-select: none;
   border-top-right-radius: 0.25rem;
 }
 .card-land-genres, .card-land-cast { 
@@ -164,7 +164,7 @@ a:hover, a:focus { text-decoration: none }
   justify-content: space-around;
   margin-top: 2rem;
   margin-bottom: 0;
-  -webkit-user-select: none;
+  user-select: none;
 }
 .form-check .col-sm-3 { text-align: left }
 
@@ -185,7 +185,7 @@ a:hover, a:focus { text-decoration: none }
 .nav-link::before, .nav-link::after {
   content: "|";
   display: inline-block;
-  transform: translateY(-50px);
+  transform: translateY(-100px);
   transition: transform 300ms ease;
 }
 
@@ -232,10 +232,7 @@ a:hover, a:focus { text-decoration: none }
   background-repeat: no-repeat;
   background-size: cover;
 }
-.modal-movie .img-left, .modal-movie .details-block {
-  float: left;
-  display: inline-block;
-}
+.modal-movie .img-left, .modal-movie .details-block { float: left }
 .modal-movie .img-left {
   padding: 15px;
   width: 30%;
@@ -273,7 +270,7 @@ a:hover, a:focus { text-decoration: none }
   text-align: center;
   font-size: 1.5rem;
   font-family: "Segoe UI";
-  -webkit-user-select: none;
+  user-select: none;
 }
 
 h2.title small { font-size: 1.75rem }

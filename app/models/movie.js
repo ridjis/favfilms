@@ -1,6 +1,8 @@
 const mongoose = require("mongoose"),
 	  Schema = mongoose.Schema;
 
+mongoose.Promise = global.Promise;
+
 const movieSchema = new Schema({
 	id: {type: Number, unique: true},
 	poster_path: String,

@@ -1,5 +1,4 @@
-const request = require("request"),
-	Movie = require("../models/movie.js");
+const Movie = require("../models/movie.js");
 
 module.exports = {
 	index: (req, res) => {

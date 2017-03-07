@@ -1,7 +1,7 @@
 {
   "name": "favfilms",
   "version": "0.9.5",
-  "description": "",
+  "description": "Place for favoritizing movies",
   "main": "server.js",
   "scripts": {
     "start": "node bin/dev",
