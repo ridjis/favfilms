@@ -102,6 +102,6 @@ ready(() => {
     }
     if ($(".close-btn") != null)
         $(".close-btn").addEventListener("click", function (event) {
-            $(".overlay").classList.remove("is-open");
+            $(".overlay").classList.toggle("is-open");
         });
 });
