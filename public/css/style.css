@@ -17,8 +17,16 @@ h4 small::after { content: ")"; }
 h4 small a, .card-land-genres a {
   color: #8553f6;
 }
+img { width: 100%; height: 100%; }
 
 a:hover, a:focus { text-decoration: none }
+
+.logo {
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
 
 #site-header .navbar, #site-main .jumbotron {
 	border-radius: 0;
@@ -56,72 +64,83 @@ a:hover, a:focus { text-decoration: none }
 
 .text-center { text-align: center }
 
-.card-land {
+.movie-card {
   display: flex;
   position: relative;
-  width: 34.125rem;
+  width: 550px;
+  height: 350px;
+  align-items: flex-start;
+  border: 1px solid #ddd;
+  border-radius: 3px;
   margin-bottom: 1rem;
   background-color: #fff;
-  border-radius: 0.25rem;
-  border: 1px solid rgba(0, 0, 0, 0.125);
 }
-.card-img-left {
+.movie-card__image {
+  width: 42%;
+}
+.movie-card__content {
   display: flex;
-  width: 14.5rem;
-  height: 21.75rem;
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+  width: 58%;
+  height: 100%;
+  flex-direction: column;
+  margin-bottom: 0px;
 }
-.card-land-block {
-  position: relative;
-  box-sizing: border-box;
-  font-family: "Segoe UI";
-  width: 19.5rem;
-  height: 21.75rem;
-  padding: 0.5rem 1.25rem 2rem 1.25rem;
-}
-.card-land-favs {
+.movie-card__content__favs {
   position: absolute;
-  right: 0; top: 0;
-  min-width: 25px; height: 25px;
-  background-color: #563d7c;
+  top: 0;
+  right: 0;
+  background-color: var(--purple);
   color: #fff;
-  text-align: center;
-  user-select: none;
-  border-top-right-radius: 0.25rem;
+  padding: 4px 5px;
 }
-.card-land-genres, .card-land-cast { 
-  font-size: 0.75rem; 
+.movie-card__content__info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+}
+.movie-card__content__info__title {
+  font-size: 1.5rem;
+}
+.movie-card__content__info__genres, .movie-card__content__info__cast {
+  font-size: 0.75rem;
   margin-bottom: 5px;
 }
-.card-land-genres a:not(:last-child)::after { content: "," }
-.card-land-cast, .card-land-text { 
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  max-height: 12rem;
+.movie-card__content__info__description {
+  overflow-y: hidden;
 }
-.card-land-cast { -webkit-line-clamp: 2 }
-.card-land-text { -webkit-line-clamp: 8 }
-.plot-longer { -webkit-line-clamp: 11 }
-
-.btn-add2fav, .btn-expand {
+.movie-card__content__info__expand {
   position: absolute;
-  bottom: 0;
-  box-sizing: border-box;
-  font-size: 1rem;
-  line-height: 1.5;
+  bottom: 0; left: 0;
+  width: 100%;
+  margin: 0;
+  padding-top: 3rem;
+  padding-bottom: 0.75rem;
+  color: #555;
+  font-size: 0.85rem;
   text-align: center;
-  cursor: pointer;
-  padding: 0.75rem 1rem;
-  text-decoration: none;
-  border: 0;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.4) 10%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,1) 100%);
 }
-.btn-add2fav {
-  width: 16.5rem;
-  right: 0;
+.movie-card__content__info__expand span {
+  position: absolute;
+  left: 10px;
+  font-size: 1.25rem;
+}
+.movie-card__content__btn-group {
+  display: flex;
+  width: 100%;
+}
+.movie-card__content__btn-group > .btn {
+  border-radius: 0;
+}
+.movie-card__content__btn-group .btn-add2fav {
+  width: 100%;
+  padding: 10px;
   border-bottom-right-radius: 0.25rem;
 }
+/* .plot-longer { -webkit-line-clamp: 11 } */
+
 .btn-add2fav:disabled { 
   opacity: .65;
   cursor: not-allowed;
@@ -182,7 +201,7 @@ a:hover, a:focus { text-decoration: none }
 }
 #btn-filter:hover { background-color: #5f4389 }
 
-.nav-link::before, .nav-link::after {
+/* .nav-link::before, .nav-link::after {
   content: "|";
   display: inline-block;
   transform: translateY(-100px);
@@ -191,7 +210,7 @@ a:hover, a:focus { text-decoration: none }
 
 .nav-link:hover::before { transform: translate(-5px, 0) }
 .nav-link:hover::after { transform: translate(5px, 0) }
-
+ */
 .table {
   width: 300px;
   text-align: right;

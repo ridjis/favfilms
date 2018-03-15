@@ -4,25 +4,32 @@
 
 <div class="wrapper">
 	{{#each results}}
-		<div class="card-land">
-			<img src="https://image.tmdb.org/t/p/w500{{poster_path}}" class="card-img-left" alt="{{title}}">
-			<div class="card-land-block">
-				<div class="card-land-favs">{{favs}}</div>
-				<h4 class="card-land-title">{{title}} 
-					<small><a href="/year/{{year}}">{{year}}</a></small>
-				</h4>
-				<p class="card-land-genres">
-					{{#each genres}}
-						<a href="/genre/{{this}}">{{this}}</a>
-					{{/each}}
-				</p>
-				<p class="card-land-cast">{{cast}}</p>
-				<p class="card-land-text">{{plot}}</p>
+		<div class="movie-card">
+			<img class="movie-card__image" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}">
+			<div class="movie-card__content">
+				<div class="movie-card__content__info">
+					<div class="movie-card__content__favs">{{favs}}</div>
+					<h4 class="movie-card__content__info__title">{{title}} 
+						<small><a href="/year/{{year}}">{{year}}</a></small>
+					</h4>
+					<p class="movie-card__content__info__genres">
+						{{#each genres}}
+							<a href="/genre/{{this}}">{{this}}</a>
+						{{/each}}
+					</p>
+					<p class="movie-card__content__info__cast">{{cast}}</p>
+					<p class="movie-card__content__info__description">{{plot}}</p>
+					<p class="movie-card__content__info__expand"><span>👇</span> expand to see more</p>
+				</div>
+				<div class="movie-card__content__btn-group">
+					<button type="button" data-id="{{id}}" class="btn btn-expand btn-primary">
+						<i class="fa fa-expand"></i>
+					</button>
+					<button type="submit" data-id="{{id}}" class="btn btn-add2fav btn-success">
+						Add as favourite
+					</button>
+				</div>
 			</div>
-			<button type="button" data-id="{{id}}" class="btn-expand btn-primary">
-				<i class="fa fa-expand"></i>
-			</button>
-			<button type="submit" data-id="{{id}}" class="btn-add2fav btn-success">Add as favourite</button>
 		</div>
 	{{/each}}
 </div>

@@ -1,33 +1,33 @@
 // grab our dependencies
-const express = require("express"),
+const express = require('express'),
+	path = require('path'),
+	mongoose = require('mongoose'),
+	bodyParser = require('body-parser'),
+	exphbs = require('express-handlebars'),
+	errorHandler = require('errorhandler'),
+	cookieParser = require('cookie-parser'),
+	favicon = require('serve-favicon'),
 	app = express(),
-	path = require("path"),
-	port = process.env.PORT || 1337,
-	exphbs = require("express-handlebars"),
-	mongoose = require("mongoose"),
-	cookieParser = require("cookie-parser"),
-	bodyParser = require("body-parser"),
-	errorHandler = require("errorhandler"),
-	favicon = require('serve-favicon');
+	port = process.env.PORT || 1337;
 
 // cofigure our application
-app.set("views", __dirname + "/views");
+app.set('views', __dirname + '/views');
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(require("./app/routes"));
-app.use(express.static(__dirname + "/public"));
+app.use(require('./app/routes'));
+app.use(express.static(__dirname + '/public'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-if ("development" === app.get("env"))
+if ('development' === app.get('env'))
 	app.use(errorHandler());
 
-app.engine("hbs", exphbs({
-	defaultLayout: "main",
-	extname: ".hbs"
+app.engine('hbs', exphbs({
+	defaultLayout: 'main',
+	extname: '.hbs'
 }));
-app.set("view engine", "hbs");
+app.set('view engine', 'hbs');
 
 mongoose.connect(process.env.DB_URI, (err) => {
 	if (err) throw err;
