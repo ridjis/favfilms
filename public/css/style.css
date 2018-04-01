@@ -115,12 +115,12 @@ a:hover, a:focus { text-decoration: none }
   bottom: 0; left: 0;
   width: 100%;
   margin: 0;
-  padding-top: 3rem;
+  padding-top: 4rem;
   padding-bottom: 0.75rem;
   color: #555;
   font-size: 0.85rem;
   text-align: center;
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.4) 10%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,1) 100%);
+  background-image: linear-gradient(to bottom, hsla(0, 0%, 100%, 0.21) 0%, hsla(0, 0%, 100%, 0.219) 7.7%, hsla(0, 0%, 100%, 0.245) 14.8%, hsla(0, 0%, 100%, 0.281) 21%, hsla(0, 0%, 100%, 0.325) 26.5%, hsla(0, 0%, 100%, 0.372) 31.4%, hsla(0, 0%, 100%, 0.422) 35.9%, hsla(0, 0%, 100%, 0.473) 40.1%, hsla(0, 0%, 100%, 0.527) 44.2%, hsla(0, 0%, 100%, 0.579) 48.1%, hsla(0, 0%, 100%, 0.632) 52%, hsla(0, 0%, 100%, 0.686) 56%, hsla(0, 0%, 100%, 0.739) 60.1%, hsla(0, 0%, 100%, 0.79) 64.3%, hsla(0, 0%, 100%, 0.84) 68.8%, hsla(0, 0%, 100%, 0.887) 73.7%, hsla(0, 0%, 100%, 0.93) 79.2%, hsla(0, 0%, 100%, 0.966) 85.4%, hsla(0, 0%, 100%, 0.991) 92.5%, hsl(0, 0%, 100%) 100%);
 }
 .movie-card__content__info__expand span {
   position: absolute;
