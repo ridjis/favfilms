@@ -1,9 +1,8 @@
 body {
-  font-family: Raleway, "Segoe UI", sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #373a3c;
-  background-color: #eee;
 }
 
 ::selection { background: #FFF498 }
@@ -23,28 +22,26 @@ a:hover, a:focus { text-decoration: none }
 
 .logo {
   display: inline-block;
-  width: 100%;
   height: 50px;
   text-align: center;
 }
 
+#site-header { background-color: #fff }
 #site-header .navbar, #site-main .jumbotron {
 	border-radius: 0;
 	border: none;
 	margin: 0;
 }
 #site-header .navbar { background-color: #fff }
-#site-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+#site-header .navbar-brand {
+  margin: 0; padding: 0;
 }
-#site-header .container::after { content: none }
-
+.navbar-collapse.show { padding: 0.5rem 0 }
+#site-main { background-color: #f7f7f8 }
 #site-main .jumbotron {
   position: relative;
-	padding-top: 40px;
-  padding-bottom: 25px;
+  padding-top: 2rem;
+  padding-bottom: 1.75rem;
 	color: #cdbfe3;
 	background-color: #563d7c;
   border-bottom: 7px solid #473267;
@@ -61,26 +58,27 @@ a:hover, a:focus { text-decoration: none }
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
-.text-center { text-align: center }
+.tc { text-align: center }
 
 .movie-card {
   display: flex;
   position: relative;
   width: 550px;
-  height: 350px;
+  max-height: 350px;
   align-items: flex-start;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  /* border: 1px solid #ddd; */
+  /* border-radius: 3px; */
   margin-bottom: 1rem;
   background-color: #fff;
+  /* box-shadow: 2px 4px 40px 3px rgba(0,0,0,0.1); */
+  box-shadow: 1px 3px 75px rgba(0,0,0,0.1);
 }
 .movie-card__image {
   width: 42%;
 }
 .movie-card__content {
   display: flex;
-  width: 58%;
+  /* width: 58%; */
   height: 100%;
   flex-direction: column;
   margin-bottom: 0px;
@@ -92,6 +90,8 @@ a:hover, a:focus { text-decoration: none }
   background-color: var(--purple);
   color: #fff;
   padding: 4px 5px;
+  min-width: 1.75rem;
+  text-align: center;
 }
 .movie-card__content__info {
   padding: 10px;
@@ -137,9 +137,8 @@ a:hover, a:focus { text-decoration: none }
 .movie-card__content__btn-group .btn-add2fav {
   width: 100%;
   padding: 10px;
-  border-bottom-right-radius: 0.25rem;
+  /* border-bottom-right-radius: 0.25rem; */
 }
-/* .plot-longer { -webkit-line-clamp: 11 } */
 
 .btn-add2fav:disabled { 
   opacity: .65;
@@ -151,23 +150,25 @@ a:hover, a:focus { text-decoration: none }
   right: 16.5rem;
 }
 .btn-wider { width: 19.5rem }
-
-.btn-outline-cust {
-  color: #563d7c;
-  border-color: #563d7c;
-  background-color: transparent;
+.nav-form-inline {
+  border: 1px solid var(--secondary);
 }
-.btn-outline-cust:hover {
-  background-color: #563d7c;
-  color: #fefefe;
+.nav-form-inline .form-control {
+  border: none;
+  display: flex;
+  flex: 1;
+}
+.nav-form-inline .btn {
+  border: none;
+  border-radius: 0;
 }
 
-.btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info, #btn-filter, .btn-outline-cust { transition: all 300ms ease }
+.btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info, #btn-filter { transition: all 300ms ease }
 
-.form-inline .form-control {
+/* .form-inline .form-control {
   width: 17.5rem;
   border-color: #563d7c;
-}
+} */
 
 .genre-box {
   display: inline-block;
@@ -223,9 +224,7 @@ a:hover, a:focus { text-decoration: none }
   display: table;
 } .clearfix::after { clear: both }
 
-/*=========================================== 
-                  # Modal
-============================================*/
+/*========= Modal =========*/
 .overlay {
   background: rgba(0, 0, 0, 0.75);
   position: fixed;
@@ -288,7 +287,6 @@ a:hover, a:focus { text-decoration: none }
   color: #fff;
   text-align: center;
   font-size: 1.5rem;
-  font-family: "Segoe UI";
   user-select: none;
 }
 
@@ -307,3 +305,20 @@ h2.title small::after { content: ")" }
   color: #eee;
 }
 .modal-movie .close-btn:hover { transform: rotateZ(90deg) translate(5px, -5px) }
+
+/*========= on small =========*/
+@media (max-width: 576px) {
+  #site-main .wrapper {
+    width: 100%;
+    padding: 0 5px;
+    margin: 20px auto;
+  }
+  #site-main .jumbotron h1 { font-size: 1.75rem }
+  .movie-card {
+    max-height: 230px;
+    border: none;
+    box-shadow: none;
+  }
+  .movie-card__content__info__cast { overflow-y: hidden }
+  .movie-card__content__info__expand { padding-top: 2.5rem }
+}

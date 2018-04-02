@@ -66,8 +66,11 @@ ready(() => {
 			btn.addEventListener("click", function (event) {
 				// if middle of button is clicked, event.target isn't button but icon
 				let self = event.target;
-				if (self.localName === "i")
+
+				if (self.localName === "svg")
 					self = self.parentElement;
+				else if (self.localName === "path")
+					self = self.parentElement.parentElement;
 
 				const movieId = self.dataset.id;
 
@@ -104,4 +107,10 @@ ready(() => {
 		$(".close-btn").addEventListener("click", function (event) {
 			$(".overlay").classList.toggle("is-open");
 		});
+
+	// toggle navbar
+	const menuBtn = $('button.navbar-toggler');
+	menuBtn.addEventListener('click', function(event) {
+		navbarSupportedContent.classList.toggle('show')
+	});
 });
