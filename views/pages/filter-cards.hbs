@@ -1,4 +1,4 @@
-<div class="jumbotron text-center" style="padding-top: 25px">
+<div class="jumbotron tc pt-3">
 	<h2>{{header}}</h2>
 	<div class="container">
 		<div class="row">
@@ -20,21 +20,33 @@
 
 <div class="wrapper">
 	{{#each results}}
-		<div class="card-land">
-			<img src="https://image.tmdb.org/t/p/w500{{poster_path}}" class="card-img-left" alt="{{title}}">
-			<div class="card-land-block">
-				<div class="card-land-favs">{{favs}}</div>
-				<h4 class="card-land-title">{{title}} <small>{{year}}</small></h4>
-				<p class="card-land-genres">
-					{{#each genres}}
-						<a href="/genre/{{this}}">{{this}}</a>
-					{{/each}}
-				</p>
-				<p class="card-land-cast">{{cast}}</p>
-				<p class="card-land-text">{{plot}}</p>
+		<div class="movie-card">
+			<img class="movie-card__image" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}">
+			<div class="movie-card__content">
+				<div class="movie-card__content__info">
+					<div class="movie-card__content__favs">{{favs}}</div>
+					<h4 class="movie-card__content__info__title">{{title}} 
+						<small><a href="/year/{{year}}">{{year}}</a></small>
+					</h4>
+					<p class="movie-card__content__info__genres">
+						{{#each genres}}
+							<a href="/genre/{{this}}">{{this}}</a>
+						{{/each}}
+					</p>
+					<p class="movie-card__content__info__cast">{{cast}}</p>
+					<p class="movie-card__content__info__description d-none d-sm-block">{{plot}}</p>
+					<p class="movie-card__content__info__expand"><span>👇</span> expand to see more</p>
+				</div>
+				<div class="movie-card__content__btn-group">
+					<button type="button" data-id="{{id}}" class="btn btn-expand btn-primary">
+						{{!-- <i class="fa fa-expand"></i> --}}
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="#fff" style="vertical-align: sub"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"/></svg>
+					</button>
+					<button type="submit" data-id="{{id}}" class="btn btn-add2fav btn-success">
+						Add as favourite
+					</button>
+				</div>
 			</div>
-			<a href="#" class="btn-expand btn-primary"><i class="fa fa-expand"></i></a>
-			<button type="submit" data-id="{{id}}" class="btn-add2fav btn-success">Add as favourite</button>
 		</div>
 	{{/each}}
 </div>

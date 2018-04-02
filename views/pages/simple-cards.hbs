@@ -1,20 +1,29 @@
-<div class="jumbotron text-center">
+<div class="jumbotron tc">
 	<h1>{{header}}</h1>
 </div>
 
 <div class="wrapper">
 	{{#each results}}
-		<div class="card-land">
+		<div class="movie-card">
 			{{#if poster_path}}
-				<img src="https://image.tmdb.org/t/p/w500{{poster_path}}" class="card-img-left" alt="{{title}}">
+				<img class="movie-card__image" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}">
 			{{else}}
-				<img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22232%22%20height%3D%22348%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20232%20348%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15768a177eb%20text%20%7B%20fill%3Argba(0%2C0%2C0%2C.35)%3Bfont-weight%3Anormal%3Bfont-family%3A%22Segoe%20UI%22%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15768a177eb%22%3E%3Crect%20width%3D%22232%22%20height%3D%22348%22%20fill%3D%22%23e0e0e0%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2225%22%20y%3D%22181%22%3ENo%20photo%20available%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" class="card-img-left" alt="{{original_title}}">
-			{{/if}}
-			<div class="card-land-block">
-				<h4 class="card-land-title">{{title}} <small>{{year}}</small></h4>
-				<p class="card-land-text plot-longer">{{plot}}</p>
+				<img class="movie-card__image" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22232%22%20height%3D%22348%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20232%20348%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15768a177eb%20text%20%7B%20fill%3Argba(0%2C0%2C0%2C.35)%3Bfont-weight%3Anormal%3Bfont-family%3A%22Segoe%20UI%22%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15768a177eb%22%3E%3Crect%20width%3D%22232%22%20height%3D%22348%22%20fill%3D%22%23e0e0e0%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2225%22%20y%3D%22181%22%3ENo%20photo%20available%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="{{title}}">
+				{{/if}}
+				<div class="movie-card__content">
+					<div class="movie-card__content__info">
+						<h4 class="movie-card__content__info__title">{{title}} 
+							<small><a href="/year/{{year}}">{{year}}</a></small>
+						</h4>
+						<p class="movie-card__content__info__description d-none d-sm-block">{{plot}}</p>
+						<p class="movie-card__content__info__expand"></p>
+					</div>
+				<div class="movie-card__content__btn-group">
+					<button type="submit" data-id="{{id}}" class="btn btn-add2fav btn-success">
+						Add as favourite
+					</button>
+				</div>
 			</div>
-			<button type="submit" data-id="{{id}}" class="btn-add2fav btn-success btn-wider">Add as favourite</button>
 		</div>
 	{{/each}}
 </div>
