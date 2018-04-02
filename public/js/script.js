@@ -30,7 +30,7 @@ ready(() => {
 				favcounter.textContent = data.favs;
 				setTimeout(() => {
 					self.removeAttribute("disabled");
-					self.textContent = "Add to favorites";
+					self.textContent = "Add as favourite ⭐";
 				}, 500);
 			});
 		});
