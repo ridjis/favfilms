@@ -1,5 +1,4 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   line-height: 1.5;
   color: #373a3c;
@@ -13,9 +12,7 @@ h4 { font-size: 1.5rem; }
 h4 small { font-size: 0.8rem; }
 h4 small::before { content: "("; }
 h4 small::after { content: ")"; }
-h4 small a, .card-land-genres a {
-  color: #8553f6;
-}
+h4 small a, .card-land-genres a { color: #8553f6 }
 img { width: 100%; height: 100%; }
 
 a:hover, a:focus { text-decoration: none }
@@ -163,13 +160,22 @@ a:hover, a:focus { text-decoration: none }
   border-radius: 0;
 }
 
-.btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info, #btn-filter { transition: all 300ms ease }
+.btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info { transition: all 300ms ease }
 
-/* .form-inline .form-control {
-  width: 17.5rem;
-  border-color: #563d7c;
-} */
-
+.form-filter {
+  display: flex;
+}
+.form-check {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+  user-select: none;
+  /* padding: 0 5rem; */
+  width: 100%;
+  flex: 1;
+}
+.form-check div { text-align: left }
 .genre-box {
   display: inline-block;
   width: 22px;
@@ -178,29 +184,19 @@ a:hover, a:focus { text-decoration: none }
   margin-right: 0.75rem;
 }
 .genre-title { font-size: 1.5rem }
-.form-check {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 2rem;
-  margin-bottom: 0;
-  user-select: none;
-}
-.form-check .col-sm-3 { text-align: left }
 
-#btn-filter {
-  position: absolute;
-  top: 0; right: 0;
-  width: 8.5rem; height: 100%;
+.btn-filter {
+  /* position: absolute;
+  top: 0; right: 0; */
+  width: 10%; height: 100%;
   border: 0;
-  font-size: 4rem;
   cursor: pointer;
   color: #cdbfe3;
   background-color: #563d7c;
   border-left: .125rem solid #473267;
-  outline: none;
 }
-#btn-filter:hover { background-color: #5f4389 }
+.btn-filter svg { width: 70%; height: 100%; }
+.btn-filter:hover { background-color: #5f4389 }
 
 /* .nav-link::before, .nav-link::after {
   content: "|";
@@ -313,6 +309,7 @@ h2.title small::after { content: ")" }
     padding: 0 5px;
     margin: 20px auto;
   }
+  #site-main .jt-filter { padding-bottom: 0 }
   #site-main .jumbotron h1 { font-size: 1.75rem }
   .movie-card {
     max-height: 230px;
@@ -321,4 +318,20 @@ h2.title small::after { content: ")" }
   }
   .movie-card__content__info__cast { overflow-y: hidden }
   .movie-card__content__info__expand { padding-top: 2.5rem }
+  .form-filter { flex-direction: column }
+  .form-check {
+    flex: initial;
+    margin-bottom: 2rem;
+  }
+  .btn-filter {
+    width: 100%;
+    height: auto;
+    padding: 1rem 0;
+    border: none;
+    border-top: .125rem solid #473267;
+  }
+  .btn-filter svg {
+    width: 10%;
+    height: auto;
+  }
 }
