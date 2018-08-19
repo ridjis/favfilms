@@ -32,6 +32,7 @@ a:hover, a:focus { text-decoration: none }
 #site-header .navbar { background-color: #fff }
 #site-header .navbar-brand {
   margin: 0; padding: 0;
+  width: 100px;
 }
 .navbar-collapse.show { padding: 0.5rem 0 }
 #site-main { background-color: #f7f7f8 }

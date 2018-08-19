@@ -1,14 +1,10 @@
-const Movie = require("../models/movie.js");
+const api = require('./api.controller')
 
 module.exports = {
-	index: (req, res) => {
-		Movie.find({}, {}, {sort: {favs: -1}}, (err, movies) => {
-			if (err) throw err;
-
-			res.render("pages/adv-cards", {
-				header: "Most favorited movies",
-				results: movies
-			});
-		});
+	index: async (req, res) => {
+		res.render('pages/adv-cards', {
+			header: 'Most favorited movies',
+			results: await api.movies()
+		})
 	}
 }
