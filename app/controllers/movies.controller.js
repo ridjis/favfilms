@@ -35,7 +35,7 @@ module.exports = {
 	popular: async (req, res) => {
 		const response = await helper.popular()
 		let movies = []
-		for (movie of response.data.results) {
+		for (movie of response) {
 			movies.push({
 				id: movie.id,
 				poster_path: movie.poster_path,
@@ -52,7 +52,7 @@ module.exports = {
 	toprated: async (req, res) => {
 		const response = await helper.topRated()
 		let movies = []
-		for (movie of response.data.results) {
+		for (movie of response) {
 			movies.push({
 				id: movie.id,
 				poster_path: movie.poster_path,
