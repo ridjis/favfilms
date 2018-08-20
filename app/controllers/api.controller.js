@@ -1,71 +1,145 @@
-const axios = require('axios')
-const Movie = require('../models/movie')
-
-const URI_POPULAR = 'https://api.themoviedb.org/3/movie/popular?'
-const URI_TOPRATED = 'https://api.themoviedb.org/3/movie/top_rated?'
-const URI_QUERY = 'https://api.themoviedb.org/3/search/movie?query='
-const URI_DETAILS = 'https://api.themoviedb.org/3/movie/'
-const API_KEY = process.env.TMDB_API
+const helper = require('./helper.controller')
 
 const api = {
-	movies() {
-		return Movie.find().sort({ favs: -1 })
-	},
-	details(id) {
-		return Movie.findOne({ id })
-	},
-	search(query) {
-		return axios(`${URI_QUERY}${query}&${API_KEY}`)
-	},
-	genres() {
-		return Movie.find().distinct('genres')
-	},
-	filter(genres) {
-		return Movie.find({ genres: { $in: genres } }).sort({ favs: -1 })
-	},
-	popular() {
-		return axios(`${URI_POPULAR}${process.env.TMDB_API}`)
-	},
-	topRated() {
-		return axios(`${URI_TOPRATED}${process.env.TMDB_API}`)
-	},
-	moviesByGenre(genre) {
-		return Movie.find({ genres: { $regex: genre } }).sort({ favs: -1 })
-	},
-	moviesByYear(year) {
-		return Movie.find({ year }).sort({ favs: -1 })
-	},
-	getMovieFromTMDB(id) {
-		return axios(`${URI_DETAILS}${id}?${API_KEY}`)
-	},
-	getCreditsForMovieFromTMDB(id) {
-		return axios(`${URI_DETAILS}${id}/credits?${API_KEY}`)
-	},
-	async upadateFavs(movie) {
-		movie.favs = movie.favs + 1
-		movie.timestamp = new Date()
-		const updated = await movie.save()
-
-		return { favs: updated.favs }
-	},
-	async persistNewMovie(id) {
-		const response = await api.getMovieFromTMDB(id)
-		const movie = {
-			id: response.data.id,
-			poster_path: response.data.poster_path,
-			backdrop_path: response.data.backdrop_path,
-			title: response.data.original_title,
-			year: response.data.release_date.substring(0, 4),
-			plot: response.data.overview,
-			genres: response.data.genres.map(genre => genre.name.replace(/\s+/g, '-'))
+	async movies(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.movies()
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
 		}
-
-		const credits = await api.getCreditsForMovieFromTMDB(id)
-		movie.cast = credits.data.cast.map(actor => actor.name).slice(0, 6)
-
-		const persisted = await (new Movie(movie).save())
-
-		return { favs: persisted.favs }
+	},
+	async details(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.details(req.params.movie_id)
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async search(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.search(req.body.query)
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async genre(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.moviesByGenre(req.params.name)
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async genres(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.genres()
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async filter(req, res) {
+		const selectedGenres = Object.keys(req.body)
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.genres(selectedGenres)
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async popular(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.popular()
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async topRated(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.topRated()
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async year(req, res) {
+		try {
+			res.status(200).json({
+				success: true,
+				data: await helper.moviesByYear(req.params.year)
+			})
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
+	},
+	async favorite(req, res) {
+		try {
+			const movie = await helper.details(req.params.movie_id)
+			
+			if (movie) {
+				res.status(200).json({
+					success: true,
+					data: await helper.upadateFavs(movie)
+				})
+			} else {
+				res.status(200).json({
+					success: true,
+					data: await helper.persistNewMovie(req.params.movie_id)
+				})
+			}
+		} catch (error) {
+			res.status(500).json({
+				success: false,
+				data: error.message
+			})
+		}
 	}
 }
 

@@ -1,4 +1,4 @@
-const api = require('./api.controller')
+const helper = require('./helper.controller')
 let GENRES = []
 
 module.exports = {
@@ -6,10 +6,10 @@ module.exports = {
 		res.send({ ok: true })
 	},
 	details: async (req, res) => {
-		return res.json(await api.details(req.params.movie_id))
+		return res.json(await helper.details(req.params.movie_id))
 	},
 	search: async (req, res) => {
-		const response = await api.search(req.body.query)
+		const response = await helper.search(req.body.query)
 		let movies = []
 		for (movie of response.data.results) {
 			movies.push({
@@ -26,14 +26,14 @@ module.exports = {
 		})
 	}, // end search
 	fav: async (req, res) => {
-		const movie = await api.details(req.params.movie_id)
+		const movie = await helper.details(req.params.movie_id)
 		if (movie)
-			return res.json(await api.upadateFavs(movie))
+			return res.json(await helper.upadateFavs(movie))
 		else
-			return res.json(await api.persistNewMovie(req.params.movie_id))
+			return res.json(await helper.persistNewMovie(req.params.movie_id))
 	}, // end fav
 	popular: async (req, res) => {
-		const response = await api.popular()
+		const response = await helper.popular()
 		let movies = []
 		for (movie of response.data.results) {
 			movies.push({
@@ -50,7 +50,7 @@ module.exports = {
 		})
 	}, // end popular
 	toprated: async (req, res) => {
-		const response = await api.topRated()
+		const response = await helper.topRated()
 		let movies = []
 		for (movie of response.data.results) {
 			movies.push({
@@ -67,7 +67,7 @@ module.exports = {
 		})
 	}, // end top-rated
 	showGenres: async (req, res) => {
-		const genres = await api.genres()
+		const genres = await helper.genres()
 		GENRES = genres
 		return res.render('pages/filter-cards', {
 			header: 'Select genre(s) to filter',
@@ -79,19 +79,19 @@ module.exports = {
 		return res.render('pages/filter-cards', {
 			header: 'Select genre(s) to filter',
 			genres: GENRES,
-			results: await api.filter(genres)
+			results: await helper.filter(genres)
 		})
 	}, // end filter-genres POST
 	genre: async (req, res) => {
 		return res.render('pages/adv-cards', {
 			header: req.params.name + ' movies',
-			results: await api.moviesByGenre(req.params.name)
+			results: await helper.moviesByGenre(req.params.name)
 		})
 	}, // end genre
 	year: async (req, res) => {
 		return res.render('pages/adv-cards', {
 			header: 'Movies from ' + req.params.year,
-			results: await api.moviesByYear(req.params.year)
+			results: await helper.moviesByYear(req.params.year)
 		})
 	} // end genre
 }
