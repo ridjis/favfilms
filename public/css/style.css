@@ -149,19 +149,30 @@ a:hover, a:focus { text-decoration: none }
 }
 .btn-wider { width: 19.5rem }
 .nav-form-inline {
-  border: 1px solid var(--secondary);
+  --border-radius: 20px;
+  border: 1px solid #ececec;
+  border-radius: var(--border-radius);
 }
 .nav-form-inline .form-control {
   border: none;
+  border-radius: var(--border-radius);
   display: flex;
   flex: 1;
+  font-size: 0.875rem;
+  padding-left: 20px;
 }
 .nav-form-inline .btn {
   border: none;
-  border-radius: 0;
+  border-radius: var(--border-radius);
+}
+.nav-form-inline .btn svg {
+  width: 16px; height: 100%;
+  vertical-align: sub;
+  fill: #979ca0;
 }
 
 .btn-primary, .btn-secondary, .btn-success, .btn-outline-success, .btn-warning, .btn-danger, .btn-info { transition: all 300ms ease }
+.btn-outline-secondary:hover { background-color: transparent }
 
 .form-filter {
   display: flex;
