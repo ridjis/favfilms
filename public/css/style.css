@@ -32,6 +32,7 @@ a:hover, a:focus { text-decoration: none }
 #site-header .navbar { background-color: #fff }
 #site-header .navbar-brand {
   margin: 0; padding: 0;
+  font-size: 0;
   width: 100px;
 }
 .navbar-collapse.show { padding: 0.5rem 0 }
@@ -51,7 +52,8 @@ a:hover, a:focus { text-decoration: none }
 
 #site-main .wrapper {
 	width: 90%;
-	margin: 50px auto;
+  margin: 0 auto;
+  padding: 50px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -97,6 +99,7 @@ a:hover, a:focus { text-decoration: none }
   flex-direction: column;
   flex: 1;
   position: relative;
+  overflow-y: hidden;
 }
 .movie-card__content__info__title {
   font-size: 1.5rem;
@@ -104,9 +107,6 @@ a:hover, a:focus { text-decoration: none }
 .movie-card__content__info__genres, .movie-card__content__info__cast {
   font-size: 0.75rem;
   margin-bottom: 5px;
-}
-.movie-card__content__info__description {
-  overflow-y: hidden;
 }
 .movie-card__content__info__expand {
   position: absolute;
@@ -304,7 +304,7 @@ h2.title small::after { content: ")" }
 .modal-movie .close-btn:hover { transform: rotateZ(90deg) translate(5px, -5px) }
 
 /*========= on small =========*/
-@media (max-width: 576px) {
+@media only screen and (max-width: 576px) {
   #site-main .wrapper {
     width: 100%;
     padding: 0 5px;
@@ -317,8 +317,10 @@ h2.title small::after { content: ")" }
     border: none;
     box-shadow: none;
   }
+  .movie-card__content__info { padding-top: 0 }
   .movie-card__content__info__cast { overflow-y: hidden }
   .movie-card__content__info__expand { padding-top: 2.5rem }
+  .movie-card__content__btn-group .btn-add2fav { font-size: 14px }
   .form-filter { flex-direction: column }
   .form-check {
     flex: initial;
@@ -335,4 +337,8 @@ h2.title small::after { content: ")" }
     width: 10%;
     height: auto;
   }
+}
+
+@media only screen and (min-width: 321px) {
+  .movie-card__content__btn-group .btn-add2fav::after { content: " ⭐" }
 }

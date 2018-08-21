@@ -36,10 +36,10 @@ const helper = {
 		return Movie.find({ year }).sort({ favs: -1 })
 	},
 	getMovieFromTMDB(id) {
-		return axios(`${URI_DETAILS}${id}?${API_KEY}`)
+		return axios(`${URI_DETAILS}${id}?${API_KEY}`).then(response => response.data)
 	},
 	getCreditsForMovieFromTMDB(id) {
-		return axios(`${URI_DETAILS}${id}/credits?${API_KEY}`)
+		return axios(`${URI_DETAILS}${id}/credits?${API_KEY}`).then(response => response.data)
 	},
 	async upadateFavs(movie) {
 		movie.favs = movie.favs + 1
@@ -49,19 +49,19 @@ const helper = {
 		return { favs: updated.favs }
 	},
 	async persistNewMovie(id) {
-		const response = await api.getMovieFromTMDB(id)
+		const response = await helper.getMovieFromTMDB(id)
 		const movie = {
-			id: response.data.id,
-			poster_path: response.data.poster_path,
-			backdrop_path: response.data.backdrop_path,
-			title: response.data.original_title,
-			year: response.data.release_date.substring(0, 4),
-			plot: response.data.overview,
-			genres: response.data.genres.map(genre => genre.name.replace(/\s+/g, '-'))
+			id: response.id,
+			poster_path: response.poster_path,
+			backdrop_path: response.backdrop_path,
+			title: response.original_title,
+			year: response.release_date.substring(0, 4),
+			plot: response.overview,
+			genres: response.genres.map(genre => genre.name.replace(/\s+/g, '-'))
 		}
 
-		const credits = await api.getCreditsForMovieFromTMDB(id)
-		movie.cast = credits.data.cast.map(actor => actor.name).slice(0, 6)
+		const credits = await helper.getCreditsForMovieFromTMDB(id)
+		movie.cast = credits.cast.map(actor => actor.name).slice(0, 6)
 
 		const persisted = await (new Movie(movie).save())
 
