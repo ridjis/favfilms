@@ -22,7 +22,7 @@ ready(() => {
 					favcounter.textContent = data.favs
 					setTimeout(() => {
 						self.removeAttribute('disabled')
-						self.textContent = 'Add as favourite ⭐'
+						self.textContent = 'Add as favorite'
 					}, 500)
 				})
 		})
@@ -49,7 +49,7 @@ ready(() => {
 						favCounterCard.textContent = data.favs
 						setTimeout(() => {
 							self.removeAttribute('disabled')
-							self.textContent = 'Add as favourite ⭐'
+							self.textContent = 'Add as favorite'
 						}, 500)
 					})
 			})
