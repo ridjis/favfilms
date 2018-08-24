@@ -108,7 +108,10 @@ a:hover, a:focus { text-decoration: none }
   font-size: 0.75rem;
   margin-bottom: 5px;
 }
-.movie-card__content__info__description { overflow-y: auto }
+.movie-card__content__info__description {
+  overflow-y: auto;
+  margin-bottom: 0;
+}
 .movie-card__content__info__expand {
   position: absolute;
   bottom: 0; left: 0;
