@@ -4,7 +4,7 @@
   "description": "Place for favoritizing movies",
   "main": "server.js",
   "scripts": {
-    "start": "node bin/dev",
+    "start": "node server.js",
     "dev": "nodemon bin/dev",
     "devi": "nodemon --inspect bin/dev"
   },

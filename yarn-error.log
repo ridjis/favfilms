@@ -1,0 +1,68 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Stefan\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
+
+PATH: 
+  C:\Users\Stefan\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Stefan\bin;C:\ProgramData\Oracle\Java\javapath;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\Program Files\nodejs;C:\Program Files\Java\jdk-10\bin;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Users\Stefan\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\Stefan\AppData\Roaming\npm;C:\Users\Stefan\youtube-dl;C:\Program Files\Java\jdk-10\bin;C:\Users\Stefan\AppData\Local\hyper\app-2.0.0\resources\bin;C:\Users\Stefan\Documents\sqlite;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.9.4
+
+Node version: 
+  8.11.4
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Users\Stefan\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:126002:13)
+      at emitNone (events.js:106:13)
+      at Interface.emit (events.js:208:7)
+      at Interface._ttyWrite (readline.js:774:16)
+      at ReadStream.onkeypress (readline.js:158:10)
+      at emitTwo (events.js:126:13)
+      at ReadStream.emit (events.js:214:7)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1010:36)
+
+npm manifest: 
+  {
+    "name": "favfilms",
+    "version": "0.9.5",
+    "description": "Place for favoritizing movies",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js",
+      "dev": "nodemon bin/dev",
+      "devi": "nodemon --inspect bin/dev"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/ridjis/favfilms.git"
+    },
+    "author": "Stefan Riđošić",
+    "license": "ISC",
+    "dependencies": {
+      "axios": "^0.18.0",
+      "body-parser": "^1.18.3",
+      "compression": "^1.7.3",
+      "cookie-parser": "^1.4.3",
+      "errorhandler": "^1.5.0",
+      "express": "^4.16.3",
+      "express-handlebars": "^3.0.0",
+      "express-session": "^1.15.6",
+      "mongoose": "^5.2.9",
+      "serve-favicon": "^2.5.0",
+      "serve-static": "^1.13.2"
+    },
+    "devDependencies": {
+      "dotenv": "^5.0.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
