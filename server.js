@@ -39,5 +39,6 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true }, err => {
 })
 
 app.listen(port, () => {
-	console.log(`App listening on http://localhost:${port}/`)
+	if (app.get('env') === 'development')
+		console.log(`App listening on http://localhost:${port}/`)
 })

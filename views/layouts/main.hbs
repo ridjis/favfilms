@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>{{header}} | favfilms</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://image.tmdb.org" rel="preconnect" crossorigin>
-	<link rel="preload" as="style" href="/css/bootstrap.min.css" onload="this.rel='stylesheet'" onerror="this.rel='stylesheet'">
+	<title>{{header}} | favfilms</title>
 	<link rel="stylesheet" href="/css/style.css">
-	<link rel="preload" as="image" href="/img/favfilms.png">
+	{{!-- <link rel="preload" as="style" href="/css/style.css" onload="this.rel='stylesheet'"> --}}
+	<link rel="preconnect" href="https://image.tmdb.org" crossorigin>
+	<link rel="dns-prefetch" href="https://image.tmdb.org" crossorigin>
 </head>
 <body>
 	<header id="site-header" class="container">
@@ -15,9 +15,7 @@
 			<a href="/" class="navbar-brand">
 				<img src="/img/favfilms.png" alt="favfilms logo">
 			</a>
-			<button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<button class="navbar-toggler">≡</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto mr-auto">
 					<li class="nav-item">
