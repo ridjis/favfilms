@@ -5,7 +5,48 @@ function ready(fn) {
 	else document.addEventListener('DOMContentLoaded', fn)
 }
 
+function lazyLoadImages() {
+	let lazyImage
+	const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'))
+
+	if (!'IntersectionObserver' in window) {
+		let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+			entries.forEach(function(entry) {
+				if (entry.isIntersecting) {
+					lazyImage = entry.target
+					lazyImage.src = lazyImage.dataset.src
+					//lazyImage.srcset = lazyImage.dataset.srcset
+					lazyImage.classList.remove('lazy')
+					lazyImageObserver.unobserve(lazyImage)
+				}
+			})
+		})
+
+		lazyImages.forEach(function(lazyImage) {
+			lazyImageObserver.observe(lazyImage)
+		})
+	} else {
+		lazyImages.forEach(image =>
+			preloadImage(image).then(() => {
+				image.src = image.dataset.src
+				image.classList.remove('lazy')
+			})
+		)
+	}
+
+	function preloadImage(img) {
+		return new Promise((resolve, reject) => {
+			const image = new Image()
+			image.src = img.dataset.src
+			image.onload = resolve
+			image.onerror = reject
+		})
+	}
+}
+
 ready(() => {
+	lazyLoadImages()
+
 	document.querySelectorAll('.btn-add2fav').forEach(btn => {
 		btn.addEventListener('click', function(event) {
 			event.preventDefault()
