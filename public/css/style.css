@@ -33,9 +33,9 @@ a:hover, a:focus { text-decoration: none }
 
 #site-header { background-color: #fff }
 #site-header .navbar, #site-main .jumbotron {
-	border-radius: 0;
-	border: none;
-	margin: 0;
+  border-radius: 0;
+  border: none;
+  margin: 0;
 }
 #site-header .navbar { background-color: #fff }
 #site-header .navbar-brand {
@@ -49,17 +49,17 @@ a:hover, a:focus { text-decoration: none }
   position: relative;
   padding-top: 2rem;
   padding-bottom: 1.75rem;
-	color: #cdbfe3;
-	background-color: #563d7c;
+  color: #cdbfe3;
+  background-color: #563d7c;
   border-bottom: 7px solid #473267;
 }
 #site-main .jumbotron h1 {
-	color: #fff;
-	font-size: 3.5rem;
+  color: #fff;
+  font-size: 3.5rem;
 }
 
 #site-main .wrapper {
-	width: 90%;
+  width: 90%;
   margin: 0 auto;
   padding: 50px 0;
   display: flex;
@@ -91,10 +91,10 @@ a:hover, a:focus { text-decoration: none }
 }
 .movie-card__info {
   padding: 10px;
+  min-height: 1px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-height: 1px;
 }
 .movie-card__favs {
   position: absolute;
