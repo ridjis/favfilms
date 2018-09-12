@@ -316,6 +316,7 @@ h2.title small::after { content: ")" }
   }
   .movie-card__info { padding-top: 0 }
   .movie-card__cast { overflow-y: hidden }
+  .movie-card__image { min-height: 207px }
   .movie-card__expand { padding-top: 2.5rem }
   .movie-card__btn-group .btn-add2fav { font-size: 14px }
   .form-filter { flex-direction: column }
@@ -337,5 +338,6 @@ h2.title small::after { content: ")" }
 }
 
 @media only screen and (min-width: 321px) {
+  .movie-card__image { min-height: 220px }
   .movie-card__btn-group .btn-add2fav::after { content: " ⭐" }
 }

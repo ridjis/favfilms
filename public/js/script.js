@@ -15,7 +15,6 @@ function lazyLoadImages() {
 				if (entry.isIntersecting) {
 					lazyImage = entry.target
 					lazyImage.src = lazyImage.dataset.src
-					//lazyImage.srcset = lazyImage.dataset.srcset
 					lazyImage.classList.remove('lazy')
 					lazyImageObserver.unobserve(lazyImage)
 				}
@@ -100,14 +99,8 @@ ready(() => {
 	if (expandbtns.length > 0) {
 		expandbtns.forEach(btn => {
 			btn.addEventListener('click', function(event) {
-				// if middle of button is clicked, event.target isn't button but icon
-				let self = event.target
-
-				if (self.localName === 'svg') self = self.parentElement
-				else if (self.localName === 'path') self = self.parentElement.parentElement
-
+				let self = event.target.closest('button')
 				const movieId = self.dataset.id
-
 				const modal = $('.modal-movie')
 				const poster = modal.childNodes[1].childNodes[1]
 				const details = modal.childNodes[3]
