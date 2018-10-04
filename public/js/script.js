@@ -1,4 +1,7 @@
+(function() {
 const $ = document.querySelector.bind(document)
+const cloudinaryBaseUrl = 'https://res.cloudinary.com/ridjis/image/fetch'
+const pixelRatio = window.devicePixelRatio || 1.0
 
 function ready(fn) {
 	if (document.readyState !== 'loading') fn()
@@ -7,16 +10,16 @@ function ready(fn) {
 
 function lazyLoadImages() {
 	let lazyImage
-	const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'))
+	const lazyImages = Array.from(document.querySelectorAll('img.lazy'))
 
 	if ('IntersectionObserver' in window) {
 		let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
 			entries.forEach(function(entry) {
 				if (entry.isIntersecting) {
-					lazyImage = entry.target
-					lazyImage.src = lazyImage.dataset.src
-					lazyImage.classList.remove('lazy')
-					lazyImageObserver.unobserve(lazyImage)
+					lazyImg = entry.target
+					lazyImg.src = formatImageSrc(lazyImg)
+					lazyImg.classList.remove('lazy')
+					lazyImageObserver.unobserve(lazyImg)
 				}
 			})
 		})
@@ -27,7 +30,7 @@ function lazyLoadImages() {
 	} else {
 		lazyImages.forEach(image =>
 			preloadImage(image).then(() => {
-				image.src = image.dataset.src
+				image.src = formatImageSrc(image)
 				image.classList.remove('lazy')
 			})
 		)
@@ -40,6 +43,12 @@ function lazyLoadImages() {
 			image.onload = resolve
 			image.onerror = reject
 		})
+	}
+
+	function formatImageSrc(image) {
+		const { clientWidth, clientHeight } = image
+		const cloudinaryImageParams = `w_${100 * Math.round(clientWidth * pixelRatio / 100)},h_${100 * Math.round(clientHeight * pixelRatio / 100)},f_auto,q_auto,dpr_auto`
+		return `${cloudinaryBaseUrl}/${cloudinaryImageParams}/${image.dataset.src}`
 	}
 }
 
@@ -138,7 +147,7 @@ ready(() => {
 	if ($('.close-btn') != null)
 		$('.close-btn').addEventListener('click', function(event) {
 			$('.overlay').classList.toggle('is-open')
-		})
+		});
 
 	// toggle navbar
 	const menuBtn = $('button.navbar-toggler')
@@ -146,3 +155,4 @@ ready(() => {
 		navbarSupportedContent.classList.toggle('show')
 	})
 })
+})()
