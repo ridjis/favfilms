@@ -57,13 +57,17 @@ const helper = {
 			title: response.original_title,
 			year: response.release_date.substring(0, 4),
 			plot: response.overview,
-			genres: response.genres.map(genre => genre.name.replace(/\s+/g, '-'))
+			vote_average: response.vote_average,
+			imdb_id: response.imdb_id,
+			genres: response.genres.map(genre =>
+				genre.name.replace(/\s+/g, '-').replace(/Science-Fiction/gi, 'Sci-Fi')
+			)
 		}
 
 		const credits = await helper.getCreditsForMovieFromTMDB(id)
 		movie.cast = credits.cast.map(actor => actor.name).slice(0, 6)
 
-		const persisted = await (new Movie(movie).save())
+		const persisted = await new Movie(movie).save()
 
 		return { favs: persisted.favs }
 	}

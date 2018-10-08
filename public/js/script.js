@@ -10,28 +10,26 @@ function ready(fn) {
 
 function lazyLoadImages() {
 	let lazyImage
-	const lazyImages = Array.from(document.querySelectorAll('img.lazy'))
+	const lazyImages = Array.from(document.querySelectorAll('[data-bg]'))
 
 	if ('IntersectionObserver' in window) {
-		let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-			entries.forEach(function(entry) {
+		let lazyImageObserver = new IntersectionObserver(entries => {
+			entries.forEach(entry => {
 				if (entry.isIntersecting) {
-					lazyImg = entry.target
-					lazyImg.src = formatImageSrc(lazyImg)
-					lazyImg.classList.remove('lazy')
-					lazyImageObserver.unobserve(lazyImg)
+					lazyImage = entry.target
+					lazyImage.style.backgroundImage = `url(${formatImageSrc(lazyImage)})`
+					lazyImageObserver.unobserve(lazyImage)
 				}
 			})
 		})
 
-		lazyImages.forEach(function(lazyImage) {
-			lazyImageObserver.observe(lazyImage)
+		lazyImages.forEach(function(img) {
+			lazyImageObserver.observe(img)
 		})
 	} else {
 		lazyImages.forEach(image =>
 			preloadImage(image).then(() => {
-				image.src = formatImageSrc(image)
-				image.classList.remove('lazy')
+				image.style.backgroundImage = formatImageSrc(image)
 			})
 		)
 	}
@@ -46,32 +44,35 @@ function lazyLoadImages() {
 	}
 
 	function formatImageSrc(image) {
-		const { clientWidth, clientHeight } = image
-		const cloudinaryImageParams = `w_${100 * Math.round(clientWidth * pixelRatio / 100)},h_${100 * Math.round(clientHeight * pixelRatio / 100)},f_auto,q_auto,dpr_auto`
-		return `${cloudinaryBaseUrl}/${cloudinaryImageParams}/${image.dataset.src}`
+		const imageParams = `w_${Math.round(image.clientWidth * pixelRatio)},f_auto,q_auto,dpr_auto`
+		return `${cloudinaryBaseUrl}/${imageParams}/${image.dataset.bg}`
 	}
 }
 
 ready(() => {
 	lazyLoadImages()
 
-	document.querySelectorAll('.btn-add2fav').forEach(btn => {
+	Array.from(document.querySelectorAll('.movie-card__genres')).forEach(genres => {
+		while (genres.children.length > 2) genres.removeChild(genres.lastChild)
+		if (genres.children.length > 1)
+			genres.lastElementChild.classList.add('xs-hide')
+	})
+
+	document.querySelectorAll('.movie-card__favs').forEach(btn => {
 		btn.addEventListener('click', function(event) {
 			event.preventDefault()
 
-			const self = event.target
+			let self = event.target.closest('button')
 			const movieId = self.dataset.id
-			const favcounter = self.parentElement.parentElement.childNodes[1].childNodes[1]
+			const favCounter = self.children[0]
 
 			self.setAttribute('disabled', true)
-			self.textContent = "Fav'd"
 			fetch(`/movies/${movieId}/fav`, { method: 'POST' })
 				.then(res => res.json())
 				.then(data => {
-					favcounter.textContent = data.favs
+					favCounter.textContent = data.favs
 					setTimeout(() => {
 						self.removeAttribute('disabled')
-						self.textContent = 'Add as favorite'
 					}, 500)
 				})
 		})
@@ -148,11 +149,5 @@ ready(() => {
 		$('.close-btn').addEventListener('click', function(event) {
 			$('.overlay').classList.toggle('is-open')
 		});
-
-	// toggle navbar
-	const menuBtn = $('button.navbar-toggler')
-	menuBtn.addEventListener('click', function(event) {
-		navbarSupportedContent.classList.toggle('show')
-	})
 })
 })()

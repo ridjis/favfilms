@@ -10,6 +10,8 @@ const movieSchema = new Schema({
 	title: String,
 	year: Number,
 	plot: String,
+	vote_average: Number,
+	imdb_id: String,
 	genres: [String],
 	cast: [String],
 	favs: { type: Number, default: 1 },
