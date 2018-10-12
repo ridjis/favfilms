@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = 'ff-static-v3'
+const STATIC_CACHE_NAME = 'ff-static-v4'
 const IMAGES_CACHE_NAME = 'ff-images'
 const ALL_CACHES = [STATIC_CACHE_NAME, IMAGES_CACHE_NAME]
 
