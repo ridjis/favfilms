@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = 'ff-static-v2'
+const STATIC_CACHE_NAME = 'ff-static-v3'
 const IMAGES_CACHE_NAME = 'ff-images'
 const ALL_CACHES = [STATIC_CACHE_NAME, IMAGES_CACHE_NAME]
 
@@ -49,6 +49,8 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
 	const requestURL = new URL(event.request.url)
+
+	if (requestURL.pathname === '/') updateIndexPage()
 
 	if (/^(\/t\/)|(\/ridjis\/)/.test(requestURL.pathname))
 		if (/(\/)$/.test(event.request.referrer))
