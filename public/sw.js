@@ -1,4 +1,4 @@
-const STATIC_CACHE_NAME = 'ff-static-v1'
+const STATIC_CACHE_NAME = 'ff-static-v2'
 const IMAGES_CACHE_NAME = 'ff-images'
 const ALL_CACHES = [STATIC_CACHE_NAME, IMAGES_CACHE_NAME]
 
@@ -24,7 +24,7 @@ const STATIC_ASSET = [
 
 self.addEventListener('install', event => {
 	console.log('[event] install')
-	importScripts('/js/idb.js')
+	self.importScripts('/js/idb.js')
 
 	event.waitUntil(
 		caches
