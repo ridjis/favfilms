@@ -30,7 +30,7 @@ function lazyLoadImages() {
 	} else {
 		lazyImages.forEach(image =>
 			preloadImage(image).then(() => {
-				image.style.backgroundImage = formatImageSrc(image)
+				image.style.backgroundImage = `url(${formatImageSrc(image)})`
 			})
 		)
 	}
@@ -38,7 +38,7 @@ function lazyLoadImages() {
 	function preloadImage(img) {
 		return new Promise((resolve, reject) => {
 			const image = new Image()
-			image.src = img.dataset.src
+			image.src = img.dataset.bg
 			image.onload = resolve
 			image.onerror = reject
 		})
