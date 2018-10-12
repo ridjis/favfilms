@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api', apiRouter)
 app.use('/', renderRouter)
-app.use(serveStatic(__dirname + '/public', { maxAge: '1y' }))
+app.use(serveStatic(__dirname + '/public', { maxAge: '1d' }))
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 if ('development' === app.get('env')) app.use(errorHandler())
