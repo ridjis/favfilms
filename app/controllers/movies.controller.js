@@ -15,6 +15,8 @@ module.exports = {
 			movies.push({
 				id: movie.id,
 				poster_path: movie.poster_path,
+				backdrop_path: movie.backdrop_path,
+				vote_average: movie.vote_average,
 				title: movie.original_title,
 				year: movie.release_date.substring(0, 4),
 				plot: movie.overview
@@ -25,12 +27,12 @@ module.exports = {
 			results: movies
 		})
 	}, // end search
-	fav: async (req, res) => {
-		const movie = await helper.details(req.params.movie_id)
-		if (movie)
-			return res.json(await helper.upadateFavs(movie))
-		else
-			return res.json(await helper.persistNewMovie(req.params.movie_id))
+	fav: async ({ params, query }, res) => {
+		const movie = await helper.details(params.movie_id)
+		if (movie) {
+			return res.json(await helper.upadateFavs(movie, query.increment_by))
+		} else
+			return res.json(await helper.persistNewMovie(params.movie_id))
 	}, // end fav
 	popular: async (req, res) => {
 		const response = await helper.popular()
@@ -38,6 +40,8 @@ module.exports = {
 		for (movie of response) {
 			movies.push({
 				id: movie.id,
+				backdrop_path: movie.backdrop_path,
+				vote_average: movie.vote_average,
 				poster_path: movie.poster_path,
 				title: movie.original_title,
 				year: movie.release_date.substring(0, 4),
@@ -56,6 +60,8 @@ module.exports = {
 			movies.push({
 				id: movie.id,
 				poster_path: movie.poster_path,
+				backdrop_path: movie.backdrop_path,
+				vote_average: movie.vote_average,
 				title: movie.original_title,
 				year: movie.release_date.substring(0, 4),
 				plot: movie.overview

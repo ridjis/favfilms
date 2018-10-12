@@ -41,8 +41,8 @@ const helper = {
 	getCreditsForMovieFromTMDB(id) {
 		return axios(`${URI_DETAILS}${id}/credits?${API_KEY}`).then(response => response.data)
 	},
-	async upadateFavs(movie) {
-		movie.favs = movie.favs + 1
+	async upadateFavs(movie, incrementBy = 1) {
+		movie.favs = movie.favs + Number.parseInt(incrementBy)
 		movie.timestamp = new Date()
 		const updated = await movie.save()
 

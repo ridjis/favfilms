@@ -18,4 +18,8 @@ const movieSchema = new Schema({
 	timestamp: { type: Date, default: Date.now }
 })
 
+movieSchema.post('find', function(result) {
+	result.map(result => result.genres_min = result.genres.slice(0, 2))
+})
+
 module.exports = mongoose.model('Movie', movieSchema)

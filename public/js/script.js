@@ -1,5 +1,6 @@
 (function() {
 const $ = document.querySelector.bind(document)
+const $$ = document.querySelectorAll.bind(document)
 const cloudinaryBaseUrl = 'https://res.cloudinary.com/ridjis/image/fetch'
 const pixelRatio = window.devicePixelRatio || 1.0
 
@@ -10,7 +11,7 @@ function ready(fn) {
 
 function lazyLoadImages() {
 	let lazyImage
-	const lazyImages = Array.from(document.querySelectorAll('[data-bg]'))
+	const lazyImages = Array.from($$('[data-bg]'))
 
 	if ('IntersectionObserver' in window) {
 		let lazyImageObserver = new IntersectionObserver(entries => {
@@ -49,16 +50,17 @@ function lazyLoadImages() {
 	}
 }
 
+function putMovieToFav(id) {
+	return idb.get(id).then(count => {
+		if (count) return idb.set(id, count + 1)
+		else return idb.set(id, 1)
+	})
+}
+
 ready(() => {
 	lazyLoadImages()
-
-	Array.from(document.querySelectorAll('.movie-card__genres')).forEach(genres => {
-		while (genres.children.length > 2) genres.removeChild(genres.lastChild)
-		if (genres.children.length > 1)
-			genres.lastElementChild.classList.add('xs-hide')
-	})
-
-	document.querySelectorAll('.movie-card__favs').forEach(btn => {
+	// TODO provjeriti za simple-card da li se trigeruje
+	$$('.card__favs').forEach(btn => {
 		btn.addEventListener('click', function(event) {
 			event.preventDefault()
 
@@ -68,17 +70,22 @@ ready(() => {
 
 			self.setAttribute('disabled', true)
 			fetch(`/movies/${movieId}/fav`, { method: 'POST' })
-				.then(res => res.json())
-				.then(data => {
-					favCounter.textContent = data.favs
-					setTimeout(() => {
-						self.removeAttribute('disabled')
-					}, 500)
-				})
+				.catch(() => {
+					if (navigator.serviceWorker && window.SyncManager) {
+						navigator.serviceWorker.ready.then(registration => {
+							return putMovieToFav(movieId)
+								.then(() => registration.sync.register('add-fav'))
+						})
+					}
+				}).then(() => {
+					let newFavCount = Number.parseInt(favCounter.textContent)
+					favCounter.textContent = newFavCount + 1
+					setTimeout(() => self.removeAttribute('disabled'), 250)
+				}).catch(error => console.error('error happened during fav* action', error))
 		})
 	})
 
-	const favbtns = document.querySelectorAll('.btn-fav')
+	const favbtns = $$('.btn-fav')
 	if (favbtns.length > 0)
 		favbtns.forEach(btn => {
 			btn.addEventListener('click', function(event) {
@@ -105,7 +112,7 @@ ready(() => {
 			})
 		})
 
-	const expandbtns = document.querySelectorAll('.btn-expand')
+	const expandbtns = $$('.btn-expand')
 	if (expandbtns.length > 0) {
 		expandbtns.forEach(btn => {
 			btn.addEventListener('click', function(event) {

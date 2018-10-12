@@ -1,45 +1,46 @@
 <div class="container">
 	{{#each results}}
-	<div class="movie-card">
+	<div class="card" data-id="{{id}}">
 		{{#if backdrop_path}}
-		<section class="movie-card__images" data-bg="https://image.tmdb.org/t/p/w780{{backdrop_path}}">
-			<img class="movie-card__images__image" src="https://image.tmdb.org/t/p/w92{{poster_path}}" alt="{{title}}">
+		<section class="card__images" data-bg="https://image.tmdb.org/t/p/w780{{backdrop_path}}">
+			<img class="card__images__image" src="https://image.tmdb.org/t/p/w92{{poster_path}}" alt="{{title}}">
 		</section>
 		{{else}}
-			<section class="movie-card__images">
-				<img class="movie-card__images__image" src="https://image.tmdb.org/t/p/w92{{poster_path}}" alt="{{title}}">
-			</section>
+		<section class="card__images card__images--missing">
+			<img class="card__images__image" src="https://image.tmdb.org/t/p/w92{{poster_path}}" alt="{{title}}">
+		</section>
 		{{/if}}
-		<main class="movie-card__body">
-			<h4 class="movie-card__title">{{title}}</h4>
-			<p class="movie-card__description">{{plot}}</p>
-			<button class="movie-card__favs" type="button" data-id="{{id}}">
-				⭐ <span class="movie-card__favs__count">{{favs}}</span>
+		
+		<main class="card__body">
+			<h4 class="card__title">{{title}}</h4>
+			<p class="card__description">{{plot}}</p>
+			<button class="card__favs" type="button" data-id="{{id}}">
+				⭐ <span class="card__favs__count">{{favs}}</span>
 			</button>
 		</main>
 
-		<footer class="movie-card__footer">
-    <div class="movie-card__footer__data">
-      <p class="movie-card__year">
-        <a href="/year/{{year}}">{{year}}</a>
-      </p>
-      <p class="movie-card__genres">
-      {{#each genres}}
-				<a href="/genre/{{this}}">{{this}}</a>
-			{{/each}}
-      </p>
-			{{#if vote_average}}
-      <p class="movie-card__overalRating"><span>{{vote_average}}<small>/10</small></span></p>
-			{{else}}
-				<p class="movie-card__overalRating"><span>-<small>/10</small></span></p>
-			{{/if}}
-    </div>
-    <div class="movie-card__footer__viewMore">
-      <a href="#">View More</a>
-    </div>
-  </footer>
+		<footer class="card__footer">
+			<div class="card__footer__data">
+				<p class="card__year">
+					<a href="/year/{{year}}">{{year}}</a>
+				</p>
+				<p class="card__genres">
+					{{#each genres_min}}
+					<a class="xs-hide" href="/genre/{{this}}">{{this}}</a>
+					{{/each}}
+				</p>
+				{{#if vote_average}}
+				<p class="card__overalRating"><span>{{vote_average}}<small>/10</small></span></p>
+				{{else}}
+				<p class="card__overalRating"><span>-<small>/10</small></span></p>
+				{{/if}}
+			</div>
+			<div class="card__footer__viewMore">
+				<a href="#">View More</a>
+			</div>
+		</footer>
 	</div>
-{{/each}}
+	{{/each}}
 </div>
 
 <div class="overlay">
