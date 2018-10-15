@@ -77,9 +77,10 @@ ready(() => {
 								.then(() => registration.sync.register('add-fav'))
 						})
 					}
-				}).then(() => {
-					let newFavCount = Number.parseInt(favCounter.textContent)
-					favCounter.textContent = newFavCount + 1
+				})
+				.then(res => res.json())
+				.then(data => {
+					favCounter.textContent = data.favs
 					setTimeout(() => self.removeAttribute('disabled'), 250)
 				}).catch(error => console.error('error happened during fav* action', error))
 		})
