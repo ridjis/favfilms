@@ -23,7 +23,7 @@ const STATIC_ASSET = [
 ]
 
 self.addEventListener('install', event => {
-	console.log('[event] install')
+	console.log('[install] installing')
 	self.importScripts('/js/idb.js')
 
 	event.waitUntil(
@@ -31,12 +31,12 @@ self.addEventListener('install', event => {
 			.open(STATIC_CACHE_NAME)
 			.then(cache => cache.addAll(STATIC_ASSET))
 			.then(() => self.skipWaiting())
-			.catch(error => console.error('greška u install događaju', error))
+			.catch(error => console.error('[install] greška u install događaju', error))
 	)
 })
 
 self.addEventListener('activate', event => {
-	console.log('[event] activate')
+	console.log('[activate] cleaning cache')
 	return event.waitUntil(
 		caches.keys().then(keys => {
 			return Promise.all(keys
@@ -69,21 +69,31 @@ self.addEventListener('fetch', event => {
 })
 
 self.addEventListener('sync', event => {
-	console.log('syncing', event.tag)
+	console.log('[sync] syncing', event.tag)
 	event.waitUntil(
 		idb.keys().then(movieIds => {
-			console.log('got movies', movieIds)
+			console.log('[sync] got movies', movieIds)
 			return Promise.all(movieIds.map(movieId => {
-				console.log('Attempting fetch', movieId)
+				console.log('[sync] attempting fetch', movieId)
 				return idb.get(movieId).then(count => {
 					const incrementBy = (count > 1) ? `?increment_by=${count}` : ''
 					fetch(`/movies/${movieId}/fav${incrementBy}`, { method: 'POST' })
 						.then(() => {
-							console.log('Sent to server')
+							console.log('[sync] sent to server')
 							return idb.del(movieId)
 						}).then(updateIndexPage)
 				})
 			}))
+		})
+	)
+})
+
+self.addEventListener('push', event => {
+	console.log('[push]', event.data.json())
+	event.waitUntil(
+		self.registration.showNotification(event.data.json().title, {
+			icon: '/img/icons/icon-256.png',
+			badge: '/img/icons/icon-96.png'
 		})
 	)
 })
@@ -119,5 +129,5 @@ function updateIndexPage() {
 				cache.put('/?homescreen=true', response.clone())
 				return cache.put('/', response)
 			})
-		}).catch(error => console.log('greška pri fetchu posle fava', error))
+		}).catch(error => console.log('[fetch|sync] greška pri fetchu posle fava', error))
 }

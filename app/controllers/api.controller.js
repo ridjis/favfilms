@@ -1,4 +1,5 @@
 const helper = require('./helper.controller')
+const wp = require('../webpush.settings')
 
 const api = {
 	async movies(req, res) {
@@ -140,6 +141,11 @@ const api = {
 				data: error.message
 			})
 		}
+	},
+	subscribe(req, res) {
+		//console.log(req.body)
+		return wp(req, res)
+		//return res.status(200).json(req.body)
 	}
 }
 

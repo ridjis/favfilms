@@ -15,4 +15,6 @@ router.get('/genres', api.genres)
 router.get('/genre/:name', api.genre)
 router.get('/year/:year', api.year)
 
+router.post('/subscription', api.subscribe)
+
 module.exports = router

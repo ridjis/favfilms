@@ -7,6 +7,7 @@ const errorHandler = require('errorhandler')
 const compression = require('compression')
 const favicon = require('serve-favicon')
 const serveStatic = require('serve-static')
+
 const renderRouter = require('./app/renderRouter')
 const apiRouter = require('./app/apiRouter')
 const app = express()
