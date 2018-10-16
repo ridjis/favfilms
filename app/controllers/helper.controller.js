@@ -14,6 +14,12 @@ const helper = {
 	details(id) {
 		return Movie.findOne({ id })
 	},
+	random() {
+		return Movie.count().then(count => {
+			const randomNumber = Math.floor((Math.random() * count) + 1)
+			return Movie.findOne().skip(randomNumber)
+		})
+	},
 	search(query) {
 		return axios(`${URI_QUERY}${query}&${API_KEY}`)
 	},

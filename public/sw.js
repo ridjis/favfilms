@@ -89,11 +89,14 @@ self.addEventListener('sync', event => {
 })
 
 self.addEventListener('push', event => {
+	const { title, body, image } = event.data.json()
 	console.log('[push]', event.data.json())
 	event.waitUntil(
-		self.registration.showNotification(event.data.json().title, {
+		self.registration.showNotification(title, {
 			icon: '/img/icons/icon-256.png',
-			badge: '/img/icons/icon-96.png'
+			badge: '/img/icons/icon-96.png',
+			body,
+			image: `https://image.tmdb.org/t/p/w300${image}`
 		})
 	)
 })
@@ -129,5 +132,5 @@ function updateIndexPage() {
 				cache.put('/?homescreen=true', response.clone())
 				return cache.put('/', response)
 			})
-		}).catch(error => console.log('[fetch|sync] greška pri fetchu posle fava', error))
+		}).catch(error => console.log('[fetch] greška pri fetchu u updateIndexPage()', error))
 }

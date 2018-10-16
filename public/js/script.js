@@ -163,18 +163,23 @@ if (navigator.serviceWorker) {
 	window.addEventListener('load', () => {
 		navigator.serviceWorker.register('/sw.js').then(reg => {
 			console.log('Service Worker registered on', reg.scope)
-			if (window.PushManager) {
+			if (window.PushManager && window.Notification) {
 				Notification.requestPermission().then(permission => {
 					if (permission === 'granted') {
-						return reg.pushManager.subscribe({
-							userVisibleOnly: true,
-							applicationServerKey: urlBase64ToUint8Array('BBOQ8YoKUJXJh0jphl4wNRP6a0ZhRttvEu2ZatBsp3YME8HP3nl8vLkAAZ6V8l2XeBOVXnP6pgDDXow5qaJBWWE')
-						}).then(subscription => {
-							fetch('/api/subscription', {
-								method: 'POST',
-								headers: { 'Content-Type': 'application/json' },
-								body: JSON.stringify(subscription)
-							}).catch(error => console.error('[POST subscription]', error))
+						reg.pushManager.getSubscription().then(existingSubscription => {
+							console.log('result of getSubscription()', existingSubscription)
+							if (!existingSubscription) {
+								return reg.pushManager.subscribe({
+									userVisibleOnly: true,
+									applicationServerKey: urlBase64ToUint8Array('BBOQ8YoKUJXJh0jphl4wNRP6a0ZhRttvEu2ZatBsp3YME8HP3nl8vLkAAZ6V8l2XeBOVXnP6pgDDXow5qaJBWWE')
+								}).then(subscription => {
+									return fetch('/api/subscription', {
+										method: 'POST',
+										headers: { 'Content-Type': 'application/json' },
+										body: JSON.stringify(subscription)
+									}).catch(error => console.error('[POST subscription]', error))
+								})
+							}
 						})
 					}
 				})
