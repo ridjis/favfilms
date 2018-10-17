@@ -40,8 +40,8 @@ self.addEventListener('activate', event => {
 	return event.waitUntil(
 		caches.keys().then(keys => {
 			return Promise.all(keys
-					.filter(cache => cache.startsWith('ff-') && !ALL_CACHES.includes(cache))
-					.map(cache => caches.delete(cache))
+				.filter(cache => cache.startsWith('ff-') && !ALL_CACHES.includes(cache))
+				.map(cache => caches.delete(cache))
 			)
 		})
 	)

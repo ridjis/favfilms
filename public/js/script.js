@@ -1,8 +1,9 @@
 (function() {
 const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
-const cloudinaryBaseUrl = 'https://res.cloudinary.com/ridjis/image/fetch'
+const CLOUDINARY_BASE_URL = 'https://res.cloudinary.com/ridjis/image/fetch'
 const pixelRatio = window.devicePixelRatio || 1.0
+const MAX_WIDTH = 780
 
 function ready(fn) {
 	if (document.readyState !== 'loading') fn()
@@ -45,8 +46,11 @@ function lazyLoadImages() {
 	}
 
 	function formatImageSrc(image) {
-		const imageParams = `w_${Math.round(image.clientWidth * pixelRatio)},f_auto,q_auto,dpr_auto`
-		return `${cloudinaryBaseUrl}/${imageParams}/${image.dataset.bg}`
+		const width = Math.round(image.clientWidth * pixelRatio)
+		const imageParams = `w_${width},f_auto,q_auto,dpr_auto`
+		if (width > MAX_WIDTH)
+			imageParams = `f_auto,q_auto,dpr_auto`
+		return `${CLOUDINARY_BASE_URL}/${imageParams}/${image.dataset.bg}`
 	}
 }
 
