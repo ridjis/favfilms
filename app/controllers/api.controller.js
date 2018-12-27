@@ -1,5 +1,4 @@
 const helper = require('./helper.controller')
-const wp = require('../settings/webpush.settings')
 
 const api = {
 	async movies(req, res) {
@@ -141,12 +140,6 @@ const api = {
 				data: error.message
 			})
 		}
-	},
-	subscribe(req, res) {
-		return wp.saveSubscriptionAndNotify(req, res)
-	},
-	weeklyRecommendation(req, res) {
-		return wp.sendWeeklyNotifications(req, res)
 	}
 }
 

@@ -81,6 +81,7 @@
 							})
 						}
 					})
+					// TODO 
 					.then(res => res.json())
 					.then(data => {
 						favCounter.textContent = data.favs
@@ -140,29 +141,7 @@
 		window.addEventListener('load', () => {
 			navigator.serviceWorker.register('/sw.js').then(reg => {
 				console.log('Service Worker registered on', reg.scope)
-				if (window.PushManager && window.Notification) {
-					Notification.requestPermission().then(permission => {
-						if (permission === 'granted') {
-							reg.pushManager.getSubscription().then(existingSubscription => {
-								console.log('result of getSubscription()', existingSubscription)
-								if (!existingSubscription) {
-									return reg.pushManager.subscribe({
-										userVisibleOnly: true,
-										applicationServerKey: urlBase64ToUint8Array('BBOQ8YoKUJXJh0jphl4wNRP6a0ZhRttvEu2ZatBsp3YME8HP3nl8vLkAAZ6V8l2XeBOVXnP6pgDDXow5qaJBWWE')
-									}).then(subscription => {
-										return fetch('/api/subscription', {
-											method: 'POST',
-											headers: { 'Content-Type': 'application/json' },
-											body: JSON.stringify(subscription)
-										}).catch(error => console.error('[POST subscription]', error))
-									})
-								}
-							})
-						}
-					})
-				}
 			}).catch(error => console.error('Service Worker registration failed', error))
 		})
 	}
-	function urlBase64ToUint8Array(e){const r=(e+"=".repeat((4-e.length%4)%4)).replace(/\-/g,"+").replace(/_/g,"/"),t=window.atob(r),n=new Uint8Array(t.length);for(let e=0;e<t.length;++e)n[e]=t.charCodeAt(e);return n}
-	})()
+})()

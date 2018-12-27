@@ -26,7 +26,7 @@ self.addEventListener('install', event => {
 	console.log('[install] installing')
 	self.importScripts('/js/idb.js')
 
-	event.waitUntil(
+	return event.waitUntil(
 		caches
 			.open(STATIC_CACHE_NAME)
 			.then(cache => cache.addAll(STATIC_ASSET))
@@ -70,7 +70,7 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('sync', event => {
 	console.log('[sync] syncing', event.tag)
-	event.waitUntil(
+	return event.waitUntil(
 		idb.keys().then(movieIds => {
 			console.log('[sync] got movies', movieIds)
 			return Promise.all(movieIds.map(movieId => {
@@ -91,7 +91,7 @@ self.addEventListener('sync', event => {
 self.addEventListener('push', event => {
 	const { title, body, image } = event.data.json()
 	console.log('[push]', event.data.json())
-	event.waitUntil(
+	return event.waitUntil(
 		self.registration.showNotification(title, {
 			icon: '/img/icons/icon-256.png',
 			badge: '/img/icons/icon-96.png',
