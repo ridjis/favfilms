@@ -1,4 +1,5 @@
 .env
+.env.build
 /node_modules
 .jshintrc
 TODO.md

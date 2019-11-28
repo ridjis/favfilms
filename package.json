@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon bin/dev",
-    "devi": "nodemon --inspect bin/dev"
+    "devi": "nodemon --inspect bin/dev",
+    "build": "node server.js"
   },
   "repository": {
     "type": "git",
