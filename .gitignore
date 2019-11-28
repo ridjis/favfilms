@@ -1,5 +1,5 @@
 .env
-.env.build
+now.json
 /node_modules
 .jshintrc
 TODO.md
