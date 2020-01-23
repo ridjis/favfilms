@@ -9,25 +9,25 @@ const API_KEY = process.env.TMDB_API
 
 const helper = {
 	movies() {
-		return Movie.find().sort({ favs: -1 })
+		return Movie.find().sort({ favs: -1 }).lean()
 	},
 	details(id) {
-		return Movie.findOne({ id })
+		return Movie.findOne({ id }).lean()
 	},
 	random() {
 		return Movie.count().then(count => {
 			const randomNumber = Math.floor((Math.random() * count) + 1)
-			return Movie.findOne().skip(randomNumber)
+			return Movie.findOne().skip(randomNumber).lean()
 		})
 	},
 	search(query) {
 		return axios(`${URI_QUERY}${query}&${API_KEY}`)
 	},
 	genres() {
-		return Movie.find().distinct('genres')
+		return Movie.find().distinct('genres').lean()
 	},
 	filter(genres) {
-		return Movie.find({ genres: { $in: genres } }).sort({ favs: -1 })
+		return Movie.find({ genres: { $in: genres } }).sort({ favs: -1 }).lean()
 	},
 	popular() {
 		return axios(`${URI_POPULAR}${process.env.TMDB_API}`).then(response => response.data.results)
@@ -36,10 +36,10 @@ const helper = {
 		return axios(`${URI_TOPRATED}${process.env.TMDB_API}`).then(response => response.data.results)
 	},
 	moviesByGenre(genre) {
-		return Movie.find({ genres: { $regex: genre } }).sort({ favs: -1 })
+		return Movie.find({ genres: { $regex: genre } }).sort({ favs: -1 }).lean()
 	},
 	moviesByYear(year) {
-		return Movie.find({ year }).sort({ favs: -1 })
+		return Movie.find({ year }).sort({ favs: -1 }).lean()
 	},
 	getMovieFromTMDB(id) {
 		return axios(`${URI_DETAILS}${id}?${API_KEY}`).then(response => response.data)

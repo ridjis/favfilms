@@ -14,7 +14,7 @@ const port = process.env.PORT || 1337
 
 app.use(compression())
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 
 app.use('/api', apiRouter)
 app.use('/', renderRouter)
@@ -26,11 +26,13 @@ if ('development' === app.get('env')) app.use(errorHandler())
 app.set('views', __dirname + '/views')
 app.engine('hbs', exphbs({
 	defaultLayout: 'main',
-	extname: '.hbs'
+  extname: '.hbs',
 }))
 app.set('view engine', 'hbs')
 
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true }, err => {
+console.log(process.env.DB_URI)
+
+mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}, err => {
 	if (err) throw err
 	if (app.get('env') === 'development') {
 		const d = new Date()
