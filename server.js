@@ -1,7 +1,6 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
 const errorHandler = require('errorhandler')
 const compression = require('compression')
@@ -14,8 +13,8 @@ const app = express()
 const port = process.env.PORT || 1337
 
 app.use(compression())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json())
+app.use(express.urlencoded())
 
 app.use('/api', apiRouter)
 app.use('/', renderRouter)
